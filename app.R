@@ -14,74 +14,92 @@ library(shinythemes)
 library(htmlTable)
 library(latex2exp)
 library(ggeasy)
+library(ggplot2)
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
-  
   theme = shinytheme("journal"),
-                navbarPage(title=list(tags$head(tags$style()), 
-                                       HTML('<img src="puzzle.png", height="30px"    
-          style="float:right"/>','<p style="color:black"></p>')),
-                          tabPanel("Home",
-                                   fluidRow(
-                                     shiny::HTML("<br><br><center> <h1>Game Theory Group!<h1> </center><br>"),
-                                     div(img(src="puzzle.png",height="100px"), style="text-align: center;"),
-                                     tags$hr(),
-                                     column(3),
-                                     column(6,
-                                            shiny::HTML("<br><br><center> <h2>What you'll find here</h2> </center><br>"),
-                                            shiny::HTML("<center><h4>An interactive tool to help you explore your interest in Game theory games or even 
+  navbarPage(
+    title = list(
+      tags$head(tags$style()),
+      HTML('<img src="puzzle.png", height="30px"
+          style="float:right"/>', '<p style="color:black"></p>')
+    ),
+    tabPanel(
+      "Home",
+      fluidRow(
+        shiny::HTML("<br><br><center> <h1>Game Theory Group!<h1> </center><br>"),
+        div(img(src = "puzzle.png", height = "100px"), style = "text-align: center;"),
+        tags$hr(),
+        column(3),
+        column(
+          6,
+          shiny::HTML("<br><br><center> <h2>What you'll find here</h2> </center><br>"),
+          shiny::HTML("<center><h4>An interactive tool to help you explore your interest in Game theory games or even
                                                         just get to know about this topic for the first time.</center></h4>")
-                                     ),
-                                     column(3)
-                                   )),
-                           tabPanel("Game", tabsetPanel(type = "tabs",
-                                                        tabPanel("Level 1", 
-                           
-                                    sidebarLayout(
-                                      mainPanel(paste("Scenario: You are one of the most well known CEOs in America running a retail company. 
-                                                      Your store in Grinnell is competing only against another retail company named Tropical Inc.You have two options: 
-                                                      Apply discounts for Thanksgiving or not. But you do not know your rival's decision. Can you make a better decision than your competitor? 
+        ),
+        column(3)
+      )
+    ),
+    tabPanel("Game", tabsetPanel(
+      type = "tabs",
+      tabPanel(
+        "Level 1",
+        sidebarLayout(
+          mainPanel(paste("Scenario: You are one of the most well known CEOs in America running a retail company.
+                                                      Your store in Grinnell is competing only against another retail company named Tropical Inc.You have two options:
+                                                      Apply discounts for Thanksgiving or not. But you do not know your rival's decision. Can you make a better decision than your competitor?
                                                       (Lets apply game theory)
-                                                      ") ,uiOutput('matrix'), textOutput("mytext_1")),
-                                      sidebarPanel(
-                                      radioGroupButtons(
-                                        inputId = "radio_discount",
-                                        label = h4("Strategy selection:"), 
-                                        choices = c("Discount"="existYes","No discount"="existNo"),
-                                        status = "primary"
-                                      ),actionButton("goButton", "Implement Changes", class = "btn-success"))
-                                    )),
-                                    tabPanel("Level 2",
-                                             sidebarLayout(
-                                               mainPanel(paste("Lets make it more interesting! What if you could select the discount amount to 
+                                                      "), uiOutput("matrix"), textOutput("mytext_1")),
+          sidebarPanel(
+            radioGroupButtons(
+              inputId = "radio_discount",
+              label = h4("Strategy selection:"),
+              choices = c("Discount" = "existYes", "No discount" = "existNo"),
+              status = "primary"
+            ), actionButton("goButton", "Implement Changes", class = "btn-success")
+          )
+        )
+      ),
+      tabPanel(
+        "Level 2",
+        sidebarLayout(
+          mainPanel(paste("Lets make it more interesting! What if you could select the discount amount to
                                                compete against Tropical Inc.? Take as a reference the table provided below and make a decision!
-                                                      "),plotOutput("plot_discount")),
-                                               sidebarPanel(
-                                                 pickerInput(
-                                                   inputId = "picker_2",
-                                                   label = h4("Strategy selection:"), 
-                                                   choices = c("0%","10%","20%","30%","40%","50%","60%","70%","80%","90%","100%"),
-                                                   options = list(
-                                                     `live-search` = TRUE)
-                                                 ),actionButton("goButton_2", "Implement Changes", class = "btn-success"))
-                                             )),
-                                    tabPanel("Level 3"))),
-                           tabPanel("Catalog",
-                                    mainPanel(
-                                      h2("List of Games"),
-                                      DT::dataTableOutput("mytable")
-                                    )),
-                           tabPanel("Process",
-                                    fluidRow(
-                                      shiny::HTML("<br><br><center> <h1>DESIGN PROCESS<h1> </center><br>"),
-                                      div(img(src="design.png",height="100px"), style="text-align: center;"),
-                                      tags$hr(),
-                                      column(3),
-                                      column(6,
-                                             shiny::HTML("<br><br><center> <h2>Usage of wireframe and screen mockup</h2> </center><br>"),
-                                             shiny::HTML("<center><h4>
-                                            
+                                                      "), plotOutput("plot_discount")),
+          sidebarPanel(
+            pickerInput(
+              inputId = "picker_2",
+              label = h4("Strategy selection:"),
+              choices = c("0%", "10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "100%"),
+              options = list(
+                `live-search` = TRUE
+              )
+            ), actionButton("goButton_2", "Implement Changes", class = "btn-success")
+          )
+        )
+      ),
+      tabPanel("Level 3")
+    )),
+    tabPanel(
+      "Catalog",
+      mainPanel(
+        h2("List of Games"),
+        DT::dataTableOutput("mytable")
+      )
+    ),
+    tabPanel(
+      "Process",
+      fluidRow(
+        shiny::HTML("<br><br><center> <h1>DESIGN PROCESS<h1> </center><br>"),
+        div(img(src = "design.png", height = "100px"), style = "text-align: center;"),
+        tags$hr(),
+        column(3),
+        column(
+          6,
+          shiny::HTML("<br><br><center> <h2>Usage of wireframe and screen mockup</h2> </center><br>"),
+          shiny::HTML("<center><h4>
+
                                              <ul><li>At first, we were unsure about how we wished to present
                 our data but making a wireframe and screen mockup helped us a
                 lot in visualizing what we wanted to do and then perform the
@@ -99,181 +117,181 @@ ui <- fluidPage(
                 We made the home page the first page that the user sees when he opens the app.
                 <br><br><li> We also made it so that when the user clicks the back button on the browser,
                 he is taken to the home page.</center></h4>")
-                                      ),
-                                      column(3)
-                                    ),
-                                    tags$hr(),
-                                    fluidRow(
-                                      column(3),
-                                      column(6,
-                                             shiny::HTML("<br><br><center> <h2>Time: How long does it take a user to accomplish a
+        ),
+        column(3)
+      ),
+      tags$hr(),
+      fluidRow(
+        column(3),
+        column(
+          6,
+          shiny::HTML("<br><br><center> <h2>Time: How long does it take a user to accomplish a
                 given set of tasks using the system?</h2> </center><br>"),
-                                             shiny::HTML("<center><h4>It takes about 5-10 minutes for a user to go through the
+          shiny::HTML("<center><h4>It takes about 5-10 minutes for a user to go through the
                 entire application and viewing the statistics of all the
                 colleges using the graphs</center></h4>")
-                                      ),
-                                      column(3)
-                                    ),
-                                    tags$hr(),
-                                    fluidRow(
-                                      column(3),
-                                      column(6,
-                                             shiny::HTML("<br><br><center> <h2>Errors: How many errors does a user make and how
+        ),
+        column(3)
+      ),
+      tags$hr(),
+      fluidRow(
+        column(3),
+        column(
+          6,
+          shiny::HTML("<br><br><center> <h2>Errors: How many errors does a user make and how
                 serious are they?</h2> </center><br>"),
-                                             shiny::HTML("<center><h4>Users generally do not make errors since it is a pretty
+          shiny::HTML("<center><h4>Users generally do not make errors since it is a pretty
                 straightforward application</center></h4>")
-                                      ),
-                                      column(3)
-                                    ),
-                                    tags$hr(),
-                                    fluidRow(
-                                      column(3),
-                                      column(6,
-                                             shiny::HTML("<br><br><center> <h2>Learning: How long does it take a novice user to
+        ),
+        column(3)
+      ),
+      tags$hr(),
+      fluidRow(
+        column(3),
+        column(
+          6,
+          shiny::HTML("<br><br><center> <h2>Learning: How long does it take a novice user to
                 learn how to use the system to do a given set of tasks?</h2> </center><br>"),
-                                             shiny::HTML("<center><h4>It should not take more than 10 minutes for a novice user
+          shiny::HTML("<center><h4>It should not take more than 10 minutes for a novice user
                 to learn how to use the application</center></h4>")
-                                      ),
-                                      column(3)
-                                    ),
-                                    tags$hr(),
-                                    fluidRow(
-                                      column(3),
-                                      column(6,
-                                             shiny::HTML("<br><br><center> <h2>Functionality: What range of tasks can a user do
+        ),
+        column(3)
+      ),
+      tags$hr(),
+      fluidRow(
+        column(3),
+        column(
+          6,
+          shiny::HTML("<br><br><center> <h2>Functionality: What range of tasks can a user do
                 in practice with the system?</h2> </center><br>"),
-                                             shiny::HTML("<center><h4> Users can play and learn throughout the 3 levels about the thinking related to decision making. </center></h4>")
-                                      ),
-                                      column(3)
-                                    ),
-                                    tags$hr(),
-                                    fluidRow(
-                                      column(3),
-                                      column(6,
-                                             shiny::HTML("<br><br><center> <h2>Recall: How easy is it for a user to recall how to use
+          shiny::HTML("<center><h4> Users can play and learn throughout the 3 levels about the thinking related to decision making. </center></h4>")
+        ),
+        column(3)
+      ),
+      tags$hr(),
+      fluidRow(
+        column(3),
+        column(
+          6,
+          shiny::HTML("<br><br><center> <h2>Recall: How easy is it for a user to recall how to use
                  the system on a task that he has not done for some time?</h2> </center><br>"),
-                                             shiny::HTML("<center><h4> Should be quite straightforward for a user that has any experience with internet.</center></h4>")
-                                      ),
-                                      column(3)
-                                    ),
-                                    tags$hr(),
-                                    fluidRow(
-                                      column(3),
-                                      column(6,
-                                             shiny::HTML("<br><br><center> <h2>Concentration: How many things does a user have to
+          shiny::HTML("<center><h4> Should be quite straightforward for a user that has any experience with internet.</center></h4>")
+        ),
+        column(3)
+      ),
+      tags$hr(),
+      fluidRow(
+        column(3),
+        column(
+          6,
+          shiny::HTML("<br><br><center> <h2>Concentration: How many things does a user have to
                 keep in mind while using the system?</h2> </center><br>"),
-                                             shiny::HTML("<center><h4>The only aspect that requires concentration is during some of the games. The users might have to 
+          shiny::HTML("<center><h4>The only aspect that requires concentration is during some of the games. The users might have to
                                                          keep track their learnings each previous levels, so that they can make a better decision to the next game.</center></h4>")
-                                      ),
-                                      column(3)
-                                    ),
-                                    tags$hr(),
-                                    fluidRow(
-                                      column(3),
-                                      column(6,
-                                             shiny::HTML("<br><br><center> <h2>Fatigue: How tired do users get when they use the
+        ),
+        column(3)
+      ),
+      tags$hr(),
+      fluidRow(
+        column(3),
+        column(
+          6,
+          shiny::HTML("<br><br><center> <h2>Fatigue: How tired do users get when they use the
                 system for extended periods?</h2> </center><br>"),
-                                             shiny::HTML("<center><h4>Users might get tired since the game rquires some thinking, which might be 
+          shiny::HTML("<center><h4>Users might get tired since the game rquires some thinking, which might be
                                                          exausting for users that do not have a good foundation in math or economics</center></h4>")
-                                      ),
-                                      column(3)
-                                    ),
-                                    tags$hr(),
-                                    fluidRow(
-                                      column(3),
-                                      column(6,
-                                             shiny::HTML("<br><br><center> <h2>Acceptability: How do users subjectively evaluate
+        ),
+        column(3)
+      ),
+      tags$hr(),
+      fluidRow(
+        column(3),
+        column(
+          6,
+          shiny::HTML("<br><br><center> <h2>Acceptability: How do users subjectively evaluate
                 the system?</h2> </center><br>"),
-                                             shiny::HTML("<center><h4>The user can evaluate the system on the basis of the use
+          shiny::HTML("<center><h4>The user can evaluate the system on the basis of the use
                 of the information received, in this case it would be about
                 game thoery</center></h4>")
-                                      ),
-                                      column(3)),
-                                      fluidRow(
-                                        
-                                        style = "height:50px;"),
-                                    ))
-                           )
-                           
+        ),
+        column(3)
+      ),
+      fluidRow(
+        style = "height:50px;"
+      ),
+    )
+  )
+)
 
-    
+
+
 
 
 # Define server logic required to draw a histogram
 server <- function(input, output) {
-  
-  discount =function( n){-((x/2)-15)^2+300}
-  x=seq(0,100, by=10)
-  y=lapply(x[1], discount)[1]
-  df=data.frame(x,y)
-  
-  output$plot_discount = renderPlot(
-    ggplot(df, aes(x,df$c.75..200..275..300..275..200..75...100...325...600...925.))+
-      geom_point()+
-      geom_smooth()+
-      theme_minimal()+
-      ylab(TeX("Profit: $\\Pi$"))+
-      xlab(TeX("Discount Amount: $n\\%$"))+
-      labs(title = TeX("Discount Function: $\\Pi(n)$: $-\\left(\\frac{n}{2}-15\\right)^{2}+300$"))+
+  discount <- function(n) {
+    -((x / 2) - 15)^2 + 300
+  }
+  x <- seq(0, 100, by = 10)
+  y <- lapply(x[1], discount)[1]
+  df <- data.frame(x, y)
+
+  output$plot_discount <- renderPlot(
+    ggplot(df, aes(x, df$c.75..200..275..300..275..200..75...100...325...600...925.)) +
+      geom_point() +
+      geom_smooth() +
+      theme_minimal() +
+      ylab(TeX("Profit: $\\Pi$")) +
+      xlab(TeX("Discount Amount: $n\\%$")) +
+      labs(title = TeX("Discount Function: $\\Pi(n)$: $-\\left(\\frac{n}{2}-15\\right)^{2}+300$")) +
       ggeasy::easy_center_title()
-    
   )
-  
+
   ## Reactivity from table
   selectdata <- reactive({
     table <- read.csv("data_catalog_games.csv")
-    ##dplyr::filter(nas1, nas1$industry %in% input$picker_sector & nas1$country %in% input$picker_country)
+    ## dplyr::filter(nas1, nas1$industry %in% input$picker_sector & nas1$country %in% input$picker_country)
   })
-  
+
   ## output table for games catalog
-  output$mytable = DT::renderDataTable({
+  output$mytable <- DT::renderDataTable({
     selectdata()
   })
-  
-  
-  
-  observeEvent(input$goButton,{
-   
-    
-    output$matrix <- renderUI({
-      
-  HTML(
-      htmlTable(matrix(c("TR/2-c,  TR/2-c"," TR-c,  0"," 0, TR-c"," TR/2,  TR/2"),
-                       ncol=2, byrow = TRUE),
-                header =  paste(c("Discount", "No Discount")),
-                rnames = paste(c("Discount", "No Discount")),
-                rgroup = "Your company",
-                n.rgroup = c(2),
-                cgroup = "Tropical Inc.",
-                n.cgroup = c(2),
-                caption="Basic table with both column spanners (groups) and row
-              groups",
-                tfoot="&dagger; A table footer commment")
-    )
-    })
-    
-    
-    #Text output response--> Question1
-    output$mytext_1  <- renderText({
-      
-      # preventing reactivity 
-      b= isolate(input$radio_discount)
-      if (b=="existYes"){
-        "You decided to provide discount, therefore you collected 50% of the sales for Thanksgiving."
-      }
-      else{
-      "You decided to not provide discount, therefore you collected 0% of the sales for Thanksgiving "
-      }
-      
-      
-    })
-  
- 
 
-  
+
+
+  observeEvent(input$goButton, {
+    output$matrix <- renderUI({
+      HTML(
+        htmlTable(matrix(c("TR/2-c,  TR/2-c", " TR-c,  0", " 0, TR-c", " TR/2,  TR/2"),
+          ncol = 2, byrow = TRUE
+        ),
+        header = paste(c("Discount", "No Discount")),
+        rnames = paste(c("Discount", "No Discount")),
+        rgroup = "Your company",
+        n.rgroup = c(2),
+        cgroup = "Tropical Inc.",
+        n.cgroup = c(2),
+        caption = "Basic table with both column spanners (groups) and row
+              groups",
+        tfoot = "&dagger; A table footer commment"
+        )
+      )
+    })
+
+    # Text output response--> Question1
+    output$mytext_1 <- renderText({
+
+      # preventing reactivity
+      b <- isolate(input$radio_discount)
+      if (b == "existYes") {
+        "You decided to provide discount, therefore you collected 50% of the sales for Thanksgiving."
+      } else {
+        "You decided to not provide discount, therefore you collected 0% of the sales for Thanksgiving "
+      }
+    })
   })
-  
 }
 
-# Run the application 
+# Run the application
 shinyApp(ui = ui, server = server)
