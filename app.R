@@ -37,7 +37,7 @@ ui <- fluidPage(
                                      column(3)
                                    )),
                            tabPanel("Game", tabsetPanel(type = "tabs",
-                                                        tabPanel("Level 1", 
+                                                        tabPanel("Level 1", br(),
                            
                                     sidebarLayout(
                                       mainPanel(paste("Scenario: You are one of the most well known CEOs in America running a retail company. 
@@ -53,13 +53,12 @@ ui <- fluidPage(
                                         status = "primary"
                                       ),actionButton("goButton", "Implement Changes", class = "btn-success"))
                                     )),
-                                    tabPanel("Level 2",
+                                    tabPanel("Level 2",br(),
                                              sidebarLayout(
                                                mainPanel(paste("Lets make it more interesting! What if you could select the discount amount to 
                                                compete against Tropical Inc.? Take as a reference the table provided below and make a decision!
                                                       "),tags$hr(),
-                                                         fluidRow(
-                                                        splitLayout(cellWidths = c("80%", "20%"), plotOutput("plot_discount"),tableOutput("table_discount")))),
+                                                         plotOutput("plot_discount"),textOutput("mytext_2")),
                                                sidebarPanel(
                                                  pickerInput(
                                                    inputId = "picker_2",
@@ -67,7 +66,8 @@ ui <- fluidPage(
                                                    choices = c("No Discount"=0,"10%"=1,"20%"=2,"30%"=3,"40%"=4,"50%"=5,"60%"=6,"70%"=7,"80%"=8,"90%"=9,"100%"=10),
                                                    options = list(
                                                      `live-search` = TRUE)
-                                                 ),actionButton("goButton_2", "Implement Changes", class = "btn-success"))
+                                                 ),
+                                                 actionButton("goButton_2", "Implement Changes", class = "btn-success"),actionButton("go", HTML('<img src="data_pic.png", height="30px"style="float:right"/>','<p style="color:black"></p>')))
                                              )),
                                     tabPanel("Level 3"))),
                            tabPanel("Catalog",
@@ -176,8 +176,8 @@ ui <- fluidPage(
                                       column(6,
                                              shiny::HTML("<br><br><center> <h2>Fatigue: How tired do users get when they use the
                 system for extended periods?</h2> </center><br>"),
-                                             shiny::HTML("<center><h4>Users might get tired since the game rquires some thinking, which might be 
-                                                         exausting for users that do not have a good foundation in math or economics</center></h4>")
+                                             shiny::HTML("<center><h4>Users might get tired since the game requires some thinking, which might be 
+                                                         exhausting for users that do not have a good foundation in math or economics</center></h4>")
                                       ),
                                       column(3)
                                     ),
@@ -215,6 +215,7 @@ server <- function(input, output) {
   df$c.75..143.75..200..243.75..275..293.75..300..293.75..275..243.75..=NULL
   
   
+  
   output$plot_discount = renderPlot(
     ggplot(df, aes(Discount,Profits))+
       geom_point()+
@@ -226,6 +227,14 @@ server <- function(input, output) {
       ggeasy::easy_center_title()
     
   )
+  
+  observeEvent(input$go, {
+    showModal(modalDialog(
+      tableOutput("table_discount"),
+      footer = NULL,
+      easyClose = TRUE
+    ))
+  })
   
  
   output$table_discount= renderTable(df)
@@ -270,7 +279,7 @@ server <- function(input, output) {
       # preventing reactivity 
       b= isolate(input$radio_discount)
       if (b=="existYes"){
-        "You decided to provide discount, therefore you collected 50% of the sales for Thanksgiving."
+        "You decided to provide discount, therefore you collected 50% of the sales for Thanksgiving minus the cost for the discount."
       }
       else{
       "You decided to not provide discount, therefore you collected 0% of the sales for Thanksgiving "
@@ -278,10 +287,27 @@ server <- function(input, output) {
       
       
     })
-  
- 
+    
 
   
+  })
+  
+  observeEvent(input$goButton_2,{
+  output$mytext_2  <- renderText({
+    # preventing reactivity 
+    b= isolate(as.numeric(input$picker_2))
+    if (b<6){
+      paste0("You decided to provide a discount of ",df$Discount[(b*2)+1], " and you made 0 profits. Try Again!")
+      
+    }
+    else{
+      
+      paste0("You decided to provide a discount of ",df$Discount[(b*2)+1], " and you made ",df$Profits[(b*2)+1]," profits. Try Again!")
+    }
+    
+    
+    
+  })
   })
   
 }
