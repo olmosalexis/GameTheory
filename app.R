@@ -15,6 +15,7 @@ library(htmlTable)
 library(latex2exp)
 library(ggeasy)
 library(ggplot2)
+library(shinydashboard)
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
@@ -40,11 +41,10 @@ ui <- fluidPage(
                                                         tabPanel("Level 1", br(),
                            
                                     sidebarLayout(
-                                      mainPanel(paste("Scenario: You are one of the most well known CEOs in America running a retail company. 
+                                      mainPanel(shiny::HTML("<p> <h4>Scenario: You are one of the most well known CEOs in America running a retail company. 
                                                       Your store in Grinnell is competing only against another retail company named Tropical Inc.You have two options: 
                                                       Apply discounts for Thanksgiving or not. But you do not know your rival's decision. Can you make a better decision than your competitor? 
-                                                      (Lets apply game theory)
-                                                      ") ,uiOutput('matrix'), textOutput("mytext_1")),
+                                                      (Lets apply game theory)<h4><p><br>") ,uiOutput('matrix'), textOutput("mytext_1")),
                                       sidebarPanel(
                                       radioGroupButtons(
                                         inputId = "radio_discount",
@@ -55,19 +55,26 @@ ui <- fluidPage(
                                     )),
                                     tabPanel("Level 2",br(),
                                              sidebarLayout(
-                                               mainPanel(paste("Lets make it more interesting! What if you could select the discount amount to 
-                                               compete against Tropical Inc.? Take as a reference the table provided below and make a decision!
-                                                      "),tags$hr(),
-                                                         plotOutput("plot_discount"),textOutput("mytext_2")),
+                                               mainPanel(shiny::HTML("<p><h4>Lets make it more interesting! What if you could select the discount amount to 
+                                                                     compete against Tropical Inc.? Take as a reference the table provided below and make a decision! Level 2 has two variations: 
+                                                                       Sequential or simultaneus game. Sequential means Tropical Inc. has full information of yourr decision. Simultaneous means Tropical Inc will make a decision without knowing your move!
+                                                                       <h4> <p><br>"),
+                                                         plotOutput("plot_discount"),tags$hr(),textOutput("mytext_2")),
                                                sidebarPanel(
+                                                 verticalLayout(
+                                                   prettyCheckbox(
+                                                     inputId = "pretty_1", label = "Sequential Game?", icon = icon("check")
+                                                   ),
                                                  pickerInput(
                                                    inputId = "picker_2",
                                                    label = h4("Strategy selection:"), 
                                                    choices = c("No Discount"=0,"10%"=1,"20%"=2,"30%"=3,"40%"=4,"50%"=5,"60%"=6,"70%"=7,"80%"=8,"90%"=9,"100%"=10),
                                                    options = list(
                                                      `live-search` = TRUE)
-                                                 ),
-                                                 actionButton("goButton_2", "Implement Changes", class = "btn-success"),actionButton("go", HTML('<img src="data_pic.png", height="30px"style="float:right"/>','<p style="color:black"></p>')))
+                                                 ),splitLayout(
+                                                 actionButton("goButton_2", "Implement Changes", class = "btn-success"),
+                                                 actionButton("go", HTML('<img src="data_pic.png", height="30px"style="float:right"/>','<p style="color:black"></p>')))
+                                                 ))
                                              )),
                                     tabPanel("Level 3"))),
                            tabPanel("Catalog",
@@ -293,21 +300,55 @@ server <- function(input, output) {
   })
   
   observeEvent(input$goButton_2,{
+    
+    
+    if(input$pretty_1==TRUE){
+      output$mytext_2  <- renderText({
+        # preventing reactivity 
+        b= isolate(as.numeric(input$picker_2))
+        if (b<6){
+          paste0("You decided to provide a discount of ",df$Discount[(b*2)+1], "%. 
+             You lost the price war and made $0 USD profit. Tropical Inc profited $", df$Profits[(b*2)+3], " USD. Try Again!")
+          
+        }
+        else if (b>6){
+          paste0("You won the price war! But a discount of ",df$Discount[(b*2)+1], "% led to a loss of $", 
+                 df$Profits[(b*2)+1], " USD. On the flip side Tropical Inc profited $ 0 USD. Try Again!")
+        }
+        else{
+          
+          paste0("You decided to provide a discount of ",df$Discount[(b*2)+1], "% and you won  $",df$Profits[(b*2)+1]/2,
+                 " USD in profits.Tropical Inc profited $", df$Profits[(6*2)+1]/2," USD. Congrats! You found the optimal solution!")
+        }
+      })
+      
+    }
+    
+    else{
   output$mytext_2  <- renderText({
     # preventing reactivity 
     b= isolate(as.numeric(input$picker_2))
     if (b<6){
-      paste0("You decided to provide a discount of ",df$Discount[(b*2)+1], " and you made 0 profits. Try Again!")
+      paste0("You decided to provide a discount of ",df$Discount[(b*2)+1], "%. 
+             You lost the price war and made $0 USD profit. Tropical Inc profited $", df$Profits[(6*2)+1], " USD. Try Again!")
       
+    }
+    else if (b>6){
+      paste0("You won the price war! But a discount of ",df$Discount[(b*2)+1], "% led to a loss of $", 
+             df$Profits[(b*2)+1], " USD. On the flip side Tropical Inc profited $ 0 USD. Try Again!")
     }
     else{
       
-      paste0("You decided to provide a discount of ",df$Discount[(b*2)+1], " and you made ",df$Profits[(b*2)+1]," profits. Try Again!")
+      paste0("You decided to provide a discount of ",df$Discount[(b*2)+1], "% and you won  $",df$Profits[(b*2)+1]/2,
+             " USD in profits.Tropical Inc profited $", df$Profits[(6*2)+1]/2," USD. Congrats! You found the optimal solution!")
     }
     
     
     
   })
+    }
+    
+    
   })
   
 }
