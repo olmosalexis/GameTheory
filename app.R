@@ -16,6 +16,8 @@ library(latex2exp)
 library(ggeasy)
 library(ggplot2)
 library(shinydashboard)
+library(formattable)
+library(dplyr)
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
@@ -80,7 +82,19 @@ ui <- fluidPage(
                            tabPanel("Catalog",
                                     mainPanel(
                                       h2("List of Games"),
-                                      DT::dataTableOutput("mytable")
+                                      DT::dataTableOutput("mytable"),
+                                      shiny::HTML("<b>Column Name Descriptions</b><br>
+                                                  <b>Player:</b> The number of players needed for the game<br>
+                                                  <b>Strategies.per.player:</b> The number of strategies available
+                                                  for each player<br>
+                                                  <b>Number.of.pure.strategy.Nash.equilibria:</b> The number of
+                                                  possible nash equilibrium situations<br>
+                                                  <b>Sequential:</b> Whether the game is sequential or not<br>
+                                                  <b>Perfect Information:</b> The game is sequential and every player
+                                                  know the actions of previous players.<br>
+                                                  <b>Constant Sum:</b>Whether one player gains if and only if other
+                                                  player loses.<br>
+                                                  ")
                                     )),
                            tabPanel("Process",
                                     fluidRow(
@@ -249,6 +263,7 @@ server <- function(input, output) {
   ## Reactivity from table
   selectdata <- reactive({
     table <- read.csv("data_catalog_games.csv")
+    table <- select(table, c(-X))
     ##dplyr::filter(nas1, nas1$industry %in% input$picker_sector & nas1$country %in% input$picker_country)
   })
   
@@ -256,7 +271,6 @@ server <- function(input, output) {
   output$mytable = DT::renderDataTable({
     selectdata()
   })
-  
   
   
   observeEvent(input$goButton,{
