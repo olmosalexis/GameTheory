@@ -113,12 +113,11 @@ ui <- fluidPage(
                                                   <b>Perfect Information:</b> The game is sequential, and every player
                                                   knows the actions of previous players.<br>
                                                   <b>Constant Sum:</b>Whether one player gains if and only if another
-                                                  player loses.
-
-                                                  ")
+                                                  player loses.<br><br><br><br>
+                                                  "),
+          tags$footer(align = "center", shiny::HTML("<br>Copyright © 2022-2023 Game Theory Group CSC-324 Fall  : Made with <3 in Grinnell, Iowa"), style = "position:absolute;bottom:0;width:95%;height:50px; /* Height of the footer */color: black;padding: 0px;background-color: white;z-index: 1000;")
         ), column(2)
-      ),
-      tags$footer(align = "center", shiny::HTML("<br>Copyright © 2022-2023 Game Theory Group CSC-324 Fall  : Made with <3 in Grinnell, Iowa"), style = "position:absolute;bottom:0;width:95%;height:50px; /* Height of the footer */color: black;padding: 0px;background-color: white;z-index: 1000;")
+      )
     ),
     tabPanel(
       "Process",
