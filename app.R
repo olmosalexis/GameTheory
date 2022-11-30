@@ -56,7 +56,7 @@ ui <- fluidPage(
           mainPanel(shiny::HTML("<p> <h4>Scenario: You are one of the most well-known CEOs in America running a retail company.
                                                       Your store in Grinnell is competing only against another retail company named Tropical Inc. You have two options:
                                                       Apply discounts for Thanksgiving or not. But you do not know your rival's decision. Can you make a better decision than your competitor?
-                                                      (Lets apply game theory)<h4><p><br>"), uiOutput("matrix"), textOutput("mytext_1")),
+                                                      (Lets apply game theory)</h4></p><br>"), uiOutput("matrix"), textOutput("mytext_1")),
           sidebarPanel(
             radioGroupButtons(
               inputId = "radio_discount",
@@ -65,8 +65,8 @@ ui <- fluidPage(
               status = "primary"
             ), actionButton("goButton", "Implement Changes", class = "btn-success")
           )
-        ),br(),br(),br(),br(),br(),br(),
-        tags$footer(align = "center", shiny::HTML("Copyright © 2022-2023 Game Theory Group CSC-324 Fall  : Made with <3 in Grinnell, Iowa"), style = "position:absolute;bottom:0;width:95%;height:50px; /* Height of the footer */color: black;padding: 0px;background-color: white;z-index: 1000;")
+        ), br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),
+        tags$footer(align = "center", shiny::HTML("<p>Copyright © 2022-2023 Game Theory Group CSC-324 Fall  : Made with <3 in Grinnell, Iowa</p>"))
       ),
       tabPanel(
         "Level 2", br(),
@@ -75,10 +75,11 @@ ui <- fluidPage(
             shiny::HTML("<p><h4>Let's make it more interesting! Could you select the discount amount to
                                                                      compete against Tropical Inc.? Take as a reference the table provided below and make a decision! Level 2 has two variations:
                                                                        Sequential or simultaneous game. Sequential means Tropical Inc. has complete information about your decision. Simultaneous means Tropical Inc will decide without knowing your move!
-                                                                       <h4> <p><br>"),
+                                                                       </h4></p><br>"),
             plotOutput("plot_discount"), tags$hr(), textOutput("mytext_2"), 
-            column(12, tags$footer(align = "center", shiny::HTML("<br><br><br><br><br><br>Copyright © 2022-2023 Game Theory Group CSC-324 Fall  : Made with <3 in Grinnell, Iowa"), style = "position:absolute;bottom:0;width:95%;height:50px; /* Height of the footer */color: black;padding: 0px;background-color: white;z-index: 1000;"))
-          ),
+            br(),br(),br(),br(),br(),
+            tags$footer(align = "center", shiny::HTML("<p>Copyright © 2022-2023 Game Theory Group CSC-324 Fall  : Made with <3 in Grinnell, Iowa</p>"))),
+          
           sidebarPanel(
             verticalLayout(
               prettyCheckbox(
