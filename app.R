@@ -22,6 +22,10 @@ library(dplyr)
 # Define UI for application that draws a histogram
 ui <- fluidPage(
   theme = shinytheme("journal"),
+  tags$head(
+    tags$link(rel="icon", type="image/png", href = "header.png"),
+    tags$title("Game Theory Fall 2022")
+  ),
   navbarPage(
     title = list(
       tags$head(tags$style()),
@@ -38,10 +42,11 @@ ui <- fluidPage(
           12,
           shiny::HTML("<center> <h2>What you'll find here</h2> </center><br>"),
           shiny::HTML("<center><h4>An interactive tool to help you explore your interest in Game theory games or even
-                                                        just get to know about this topic for the first time.</center></h4>")
+                                                        just get to know about this topic for the first time.</center></h4>"),
+          br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),
+          tags$footer(align = "center", shiny::HTML("Copyright © 2022-2023 Game Theory Group CSC-324 Fall  : Made with <3 in Grinnell, Iowa"), style = "position:absolute;bottom:0;width:95%;height:50px; /* Height of the footer */color: black;padding: 0px;background-color: white;z-index: 1000;")
         )
-      ),
-      tags$footer(align = "center", shiny::HTML("Copyright © 2022-2023 Game Theory Group CSC-324 Fall  : Made with <3 in Grinnell, Iowa"), style = "position:absolute;bottom:0;width:95%;height:50px; /* Height of the footer */color: black;padding: 0px;background-color: white;z-index: 1000;")
+      )
     ),
     tabPanel("Game", tabsetPanel(
       type = "tabs",
@@ -51,7 +56,7 @@ ui <- fluidPage(
           mainPanel(shiny::HTML("<p> <h4>Scenario: You are one of the most well-known CEOs in America running a retail company.
                                                       Your store in Grinnell is competing only against another retail company named Tropical Inc. You have two options:
                                                       Apply discounts for Thanksgiving or not. But you do not know your rival's decision. Can you make a better decision than your competitor?
-                                                      (Lets apply game theory)<h4><p><br>"), uiOutput("matrix"), textOutput("mytext_1")),
+                                                      (Lets apply game theory)</h4></p><br>"), uiOutput("matrix"), textOutput("mytext_1")),
           sidebarPanel(
             radioGroupButtons(
               inputId = "radio_discount",
@@ -60,7 +65,8 @@ ui <- fluidPage(
               status = "primary"
             ), actionButton("goButton", "Implement Changes", class = "btn-success")
           )
-        )
+        ), br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),
+        tags$footer(align = "center", shiny::HTML("<p>Copyright © 2022-2023 Game Theory Group CSC-324 Fall  : Made with <3 in Grinnell, Iowa</p>"))
       ),
       tabPanel(
         "Level 2", br(),
@@ -69,9 +75,11 @@ ui <- fluidPage(
             shiny::HTML("<p><h4>Let's make it more interesting! Could you select the discount amount to
                                                                      compete against Tropical Inc.? Take as a reference the table provided below and make a decision! Level 2 has two variations:
                                                                        Sequential or simultaneous game. Sequential means Tropical Inc. has complete information about your decision. Simultaneous means Tropical Inc will decide without knowing your move!
-                                                                       <h4> <p><br>"),
-            plotOutput("plot_discount"), tags$hr(), textOutput("mytext_2")
-          ),
+                                                                       </h4></p><br>"),
+            plotOutput("plot_discount"), tags$hr(), textOutput("mytext_2"), 
+            br(),br(),br(),br(),br(),
+            tags$footer(align = "center", shiny::HTML("<p>Copyright © 2022-2023 Game Theory Group CSC-324 Fall  : Made with <3 in Grinnell, Iowa</p>"))),
+          
           sidebarPanel(
             verticalLayout(
               prettyCheckbox(
@@ -93,7 +101,7 @@ ui <- fluidPage(
         )
       ),
       tabPanel("Level 3"),
-      tags$footer(align = "center", shiny::HTML("Copyright © 2022-2023 Game Theory Group CSC-324 Fall  : Made with <3 in Grinnell, Iowa"), style = "position:absolute;bottom:0;width:95%;height:50px; /* Height of the footer */color: black;padding: 0px;background-color: white;z-index: 1000;")
+      
     )),
     tabPanel(
       "Catalog",
@@ -254,9 +262,9 @@ server <- function(input, output) {
   df$x <- NULL
   df$Profits <- df$c.75..143.75..200..243.75..275..293.75..300..293.75..275..243.75..
   df$c.75..143.75..200..243.75..275..293.75..300..293.75..275..243.75.. <- NULL
-
-
-
+  
+  
+  
   output$plot_discount <- renderPlot(
     ggplot(df, aes(Discount, Profits)) +
       geom_point() +
@@ -267,7 +275,7 @@ server <- function(input, output) {
       labs(title = TeX("Discount Function: $\\Pi(n)$: $-\\left(\\frac{n}{2}-15\\right)^{2}+300$")) +
       ggeasy::easy_center_title()
   )
-
+  
   observeEvent(input$go, {
     showModal(modalDialog(
       tableOutput("table_discount"),
@@ -275,28 +283,28 @@ server <- function(input, output) {
       easyClose = TRUE
     ))
   })
-
-
+  
+  
   output$table_discount <- renderTable(df)
-
+  
   ## Reactivity from table
   selectdata <- reactive({
     table <- read.csv("data_catalog_games.csv")
     table <- select(table, c(-X))
     ## dplyr::filter(nas1, nas1$industry %in% input$picker_sector & nas1$country %in% input$picker_country)
   })
-
+  
   ## output table for games catalog
   output$mytable <- DT::renderDataTable({
     selectdata()
   })
-
-
+  
+  
   observeEvent(input$goButton, {
     output$matrix <- renderUI({
       HTML(
         htmlTable(matrix(c("TR/2-c,  TR/2-c", " TR-c,  0", " 0, TR-c", " TR/2,  TR/2"),
-          ncol = 2, byrow = TRUE
+                         ncol = 2, byrow = TRUE
         ),
         header = paste(c("Discount", "No Discount")),
         rnames = paste(c("Discount", "No Discount")),
@@ -310,11 +318,11 @@ server <- function(input, output) {
         )
       )
     })
-
-
+    
+    
     # Text output response--> Question1
     output$mytext_1 <- renderText({
-
+      
       # preventing reactivity
       b <- isolate(input$radio_discount)
       if (b == "existYes") {
@@ -324,7 +332,7 @@ server <- function(input, output) {
       }
     })
   })
-
+  
   observeEvent(input$goButton_2, {
     if (input$pretty_1 == TRUE) {
       output$mytext_2 <- renderText({
