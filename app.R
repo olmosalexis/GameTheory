@@ -18,6 +18,7 @@ library(ggplot2)
 library(shinydashboard)
 library(formattable)
 library(dplyr)
+library(shinyalert)
 
 
 source("catalog.R")
