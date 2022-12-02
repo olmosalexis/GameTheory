@@ -19,9 +19,14 @@ library(shinydashboard)
 library(formattable)
 library(dplyr)
 
+
+source("catalog.R")
+source("box.R")
+
 # Define UI for application that draws a histogram
 ui <- fluidPage(
   theme = shinytheme("journal"),
+  useShinyalert(),
   tags$head(
     tags$link(rel="icon", type="image/png", href = "header.png"),
     tags$title("Game Theory Fall 2022")
@@ -41,10 +46,10 @@ ui <- fluidPage(
         column(
           12,
           shiny::HTML("<center> <h4 style= color:#696969>E-learning platform powered by the Game Theory Group.</h4> </center>"),
-          shiny::HTML("<center><h3>We provide a user-friendly interactive tool that allows users to learn more about 
+          shiny::HTML("<center><h3>We provide a user-friendly interactive tool that allows users to learn more about
           Game Theory through a tutorial and example game simulations for further Game Theory exploration.</h3><br></center>"),
-          
-          
+
+
           br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),
           tags$footer(align = "center", shiny::HTML("Copyright © 2022-2023 Game Theory Group CSC-324 Fall  : Made with <3 in Grinnell, Iowa"), style = "position:absolute;bottom:0;width:95%;height:50px; /* Height of the footer */color: black;padding: 0px;background-color: white;z-index: 1000;")
         )
@@ -55,12 +60,12 @@ ui <- fluidPage(
       fluidRow(
         column(
           12,
-          
+
           shiny::HTML("<h1> Game Theory Tutorial</h1><br>"),
-          
+
           shiny::HTML("<p style= color:black;font-size:120%;><b>Welcome!</b> Before exploring the rest of our app, we'll begin by giving a bit of an introduction into Game Theory
           and providing resources to be explored to gain a deeper understanding of Game Theory.</p><br>"),
-          
+
           shiny::HTML("<p style= color:black;font-size:120%;>The tutorial will be composed of the following:</p>
                       <ul style= color:black;font-size:120%;>
                           <li>What is a game?</li>
@@ -70,31 +75,31 @@ ui <- fluidPage(
                           <li>Nash Equilibrium</li>
                           <li>Frequent Terms</li>
                       </ul>"),
-          
+
           shiny::HTML("<h3> What is a game?</h3>"),
-          
-          shiny::HTML("<p style= color:black;font-size:120%;> A game is all situations in which at least one agent 
-          can only act to maximize his utility through anticipating the responses to his actions by one or more 
+
+          shiny::HTML("<p style= color:black;font-size:120%;> A game is all situations in which at least one agent
+          can only act to maximize his utility through anticipating the responses to his actions by one or more
           other agents. Examples: Chess, RPS, Checkers <p>
                       <dl>
                       <dt> Examples</dt>
                       <dd>Chess, RPS, Checkers</dd>"),
-          
+
           shiny::HTML("<h3> What is Game Theory?</h3>"),
-          
-          shiny::HTML("<p style= color:black;font-size:120%;> GT is the study of interdependent choice and action, 
-          which includes the study of strategic decision making. In short, GT is a study of how to mathematically determine the 
+
+          shiny::HTML("<p style= color:black;font-size:120%;> GT is the study of interdependent choice and action,
+          which includes the study of strategic decision making. In short, GT is a study of how to mathematically determine the
           best strategy for given conditions in order to optimize outcome.<p>"),
-          
+
           shiny::HTML("<h3> Applications of Game Theory</h3>"),
-          
-          shiny::HTML("<p style= color:black;font-size:120%;> Mathematics, Economics, Political Science, International 
-          Relations, Philosophy, Psychology... in short, it’s everywhere! GT does not solve the problem at hand. Instead, it 
-          helps to illuminate the problem and offers us a different way of interpreting the competitive interactions and 
+
+          shiny::HTML("<p style= color:black;font-size:120%;> Mathematics, Economics, Political Science, International
+          Relations, Philosophy, Psychology... in short, it’s everywhere! GT does not solve the problem at hand. Instead, it
+          helps to illuminate the problem and offers us a different way of interpreting the competitive interactions and
           possible results.<p>"),
-          
+
           shiny::HTML("<h3> Key Elements of a Game</h3>"),
-          
+
           shiny::HTML("<ul style= color:black;font-size:100%;>
                           <li>Players: Who is interacting?</li>
                           <li>Strategies: What are their options?</li>
@@ -102,27 +107,27 @@ ui <- fluidPage(
                           <li>Information: What do they know?</li>
                           <li>Rationality: How do they think?</li>
                       </ul>"),
-          
+
           shiny::HTML("<h3> Nash Equilibrium (NE) </h3>"),
-          
+
           shiny::HTML("<p style= color:black;font-size:120%;>
-                      Nash equilibrium is set of strategies such that no player can obtain a higher payoff by switching to 
-                      a different strategy while the strategies of all other players are held fixed. In short, every player 
+                      Nash equilibrium is set of strategies such that no player can obtain a higher payoff by switching to
+                      a different strategy while the strategies of all other players are held fixed. In short, every player
                       is doing what is best for them given what the other person is doing.<p>"),
-          
+
           shiny::HTML("<h3>Frequent Terms</h3>"),
-          
+
           shiny::HTML("<ul style= color:black;font-size:100%;>
                           <li>Payoff: Net outcome of playing  game.</li>
                           <li>Payoff Matrix: It is the table showing outcomes or payoffs of different strategies of the game.</li>
-                          <li>Dominant Strategy: A strategy is called dominant if regardless of what the other player does, that player 
+                          <li>Dominant Strategy: A strategy is called dominant if regardless of what the other player does, that player
                           should always play that way.</li>
                       </ul>"),
-          
+
           shiny::HTML("<h2>Further Resources</h2>"),
-          
-          shiny::HTML("<p style= color:black;font-size:100%;> For users interested in learning more beyond our tutorial, we'd 
-                      recommend watching the following videos:</p> 
+
+          shiny::HTML("<p style= color:black;font-size:100%;> For users interested in learning more beyond our tutorial, we'd
+                      recommend watching the following videos:</p>
                       &nbsp;&nbsp;&nbsp; <a href=https://www.youtube.com/watch?v=PCcVODWm-oY target=_blank rel=noopener noreferrer> Game Theory Crash Course</a><br>
                       &nbsp;&nbsp;&nbsp; <a href=https://www.youtube.com/watch?v=MHS-htjGgSY target=_blank rel=noopener noreferrer> Game Theory Decision Making</a><br>
                       &nbsp;&nbsp;&nbsp; <a href=https://www.youtube.com/watch?v=0i7p9DNvtjk target=_blank rel=noopener noreferrer> Nash Equilibrium</a>"),
@@ -157,11 +162,11 @@ ui <- fluidPage(
                                                                      compete against Tropical Inc.? Take as a reference the table provided below and make a decision! Level 2 has two variations:
                                                                        Sequential or simultaneous game. Sequential means Tropical Inc. has complete information about your decision. Simultaneous means Tropical Inc will decide without knowing your move!
                                                                        </h4></p><br>"),
-                                                plotOutput("plot_discount"), tags$hr(), span(textOutput("lossMessage"), style="color:red"), 
+                                                plotOutput("plot_discount"), tags$hr(), span(textOutput("lossMessage"), style="color:red"),
                                                 span(textOutput("winMessage"), style="color:green"), span(textOutput("hintMessage"), style="color:blue"),
                                                 br(),br(),br(),br(),br(),
                                                 tags$footer(align = "center", shiny::HTML("<p>Copyright © 2022-2023 Game Theory Group CSC-324 Fall  : Made with <3 in Grinnell, Iowa</p>"))),
-                                              
+
                                               sidebarPanel(
                                                 verticalLayout(
                                                   prettyCheckbox(
@@ -183,44 +188,21 @@ ui <- fluidPage(
                                             )
                                           ),
       tabPanel("Level 3"),
-      
+
     )),
-    tabPanel(
-      "Catalog",
-      mainPanel(
-        column(2),
-        column(
-          8,
-          h2("List of Games"),
-          DT::dataTableOutput("mytable"),
-          shiny::HTML("<b>Column Name Descriptions</b><br>
-                                                  <b>Player:</b> The number of players needed for the game<br>
-                                                  <b>Strategies.per.player:</b> The number of strategies available
-                                                  for each player<br>
-                                                  <b>Number.of.pure.strategy.Nash.equilibria:</b> The number of
-                                                  possible nash equilibrium situations<br>
-                                                  <b>Sequential:</b> Whether the game is sequential or not<br>
-                                                  <b>Perfect Information:</b> The game is sequential, and every player
-                                                  knows the actions of previous players.<br>
-                                                  <b>Constant Sum:</b>Whether one player gains if and only if another
-                                                  player loses.<br><br><br><br>
-                                                  "),
-          tags$footer(align = "center", shiny::HTML("<br>Copyright © 2022-2023 Game Theory Group CSC-324 Fall  : Made with <3 in Grinnell, Iowa"), style = "position:absolute;bottom:0;width:95%;height:50px; /* Height of the footer */color: black;padding: 0px;background-color: white;z-index: 1000;")
-        ), column(2)
-      )
-    ),
-    
+    catalog,
+
     tabPanel(
       "Process",
-      
+
       tabsetPanel(
         id = "processes",
         tabPanel(
           "Process & Acknowledgement",
           actionButton("d_button", HTML('<img src="design.png",  height = "150px", width = "300px", style="float:right"/>', '<p style="color:black"></p>')),
-          
+
           actionButton("r_button", HTML('<img src="research.png",  height = "150px", width = "300px", style="float:right"/>', '<p style="color:black"></p>')),
-          
+
         ),
         tabPanel(
           "Design Process",
@@ -340,21 +322,21 @@ ui <- fluidPage(
             )
           )
         ),
-        
-        
+
+
         tabPanel(
           "Research Process",
           id="Research Process",
           shiny::HTML("<br><center><h2>Research</h2></center><br>")
         ),
-        
+
         tabPanel(
           "Acknowledgments",
           id="acknowledgments",
           shiny::HTML("<br><center><h2>Acknowledge</h2></center><br>")
         )
-        
-        
+
+
       )
     )
 
@@ -377,9 +359,14 @@ server <- function(input, output, session) {
   df$x <- NULL
   df$Profits <- df$c.75..143.75..200..243.75..275..293.75..300..293.75..275..243.75..
   df$c.75..143.75..200..243.75..275..293.75..300..293.75..275..243.75.. <- NULL
-  
-  
-  
+  table <- read.csv("data_catalog_games.csv")
+  tb <- read.csv("data_catalog_games.csv")
+  # table <- select(table, c(-X))
+  # add id to table
+  tb$index = 1:nrow(tb)
+  # add hyperlinks
+  tb$name <- merge(tb$Game, tb$link);
+
   output$plot_discount <- renderPlot(
     ggplot(df, aes(Discount, Profits)) +
       geom_point() +
@@ -390,7 +377,7 @@ server <- function(input, output, session) {
       labs(title = TeX("Discount Function: $\\Pi(n)$: $-\\left(\\frac{n}{2}-15\\right)^{2}+300$")) +
       ggeasy::easy_center_title()
   )
-  
+
   observeEvent(input$go, {
     showModal(modalDialog(
       tableOutput("table_discount"),
@@ -398,23 +385,56 @@ server <- function(input, output, session) {
       easyClose = TRUE
     ))
   })
-  
-  
+
+
   output$table_discount <- renderTable(df)
-  
+
   ## Reactivity from table
   selectdata <- reactive({
     table <- read.csv("data_catalog_games.csv")
     table <- select(table, c(-X))
     ## dplyr::filter(nas1, nas1$industry %in% input$picker_sector & nas1$country %in% input$picker_country)
   })
-  
+
   ## output table for games catalog
   output$mytable <- DT::renderDataTable({
     selectdata()
+  },escape = FALSE)
+  output$table <- renderUI(list_table());
+    ## Reactivity from table
+  selectdata <- reactive({
+    return(tb %>% select(c('name', 'Players')))
+    ## dplyr::filter(nas1, nas1$industry %in% input$picker_sector & nas1$country %in% input$picker_country)
   })
-  
-  
+  selectbox <- reactive({
+    return(tb %>% select(c('Game', 'Players', 'index')))
+    ## dplyr::filter(nas1, nas1$industry %in% input$picker_sector & nas1$country %in% input$picker_country)
+  })
+
+  observeEvent(input$game, {
+    if (input$game != '0') {
+      g <- tb %>% filter(index == input$game)
+      print(g);
+
+      # updateTextInput(session, 'game', value='0');
+      shinyalert(g$Game,tags$div(style="display: flex;", g$Players, shiny::HTML(paste0("<a href=\"",g$link,"\"  target=_blank rel=noopener noreferrer>Learn more</a>"))),
+                 html=TRUE,
+                 # type='info',
+                # callbackJS = "Shiny.setInputValue('game', '0');",
+                  # callbackR = function() {updateTextInput(session, ig, value='0')}
+                 )
+      updateTextInput(session, 'game', value='0');
+    }
+  })
+
+  observeEvent(input$boxmode, {
+    t <- selectbox();
+    output$table <- renderUI(box_table(Map(boxCard, t$Game, t$Players, t$index, style="")));
+  })
+  observeEvent(input$listmode, {
+    output$table <- renderUI(list_table());
+  })
+
   observeEvent(input$goButton, {
     output$matrix <- renderUI({
       HTML(
@@ -433,19 +453,19 @@ server <- function(input, output, session) {
         )
       )
     })
-    
+
     observeEvent(input$d_button, {
       updateTabsetPanel(session, "processes",selected = "Design Process")
     })
-    
+
     observeEvent(input$r_button, {
       updateTabsetPanel(session, "processes",selected = "Research Process")
     })
-    
-    
+
+
     # Text output response--> Question1
     output$mytext_1 <- renderText({
-      
+
       # preventing reactivity
       b <- isolate(input$radio_discount)
       if (b == "existYes") {
@@ -455,7 +475,7 @@ server <- function(input, output, session) {
       }
     })
   })
-  
+
   observeEvent(input$goButton_2, {
     if (input$pretty_1 == TRUE) {
       output$mytext_2 <- renderText({
@@ -497,12 +517,12 @@ server <- function(input, output, session) {
       })
     }
   })
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
   observeEvent(input$goButton_2, {
     output$lossMessage <- renderText("")
     output$winMessage <- renderText("")
@@ -523,7 +543,7 @@ server <- function(input, output, session) {
                                                as.character(df$Profits[(b * 2) + 1]), " USD. On the flip side Tropical Inc profited $ 0 USD."))
         output$hintMessage <- renderText(paste("Hint: We highly recommend checking out the table of discounts and potential profits.
                                                You can access the table by clicking on the folder button next to the green implement button. You lost because
-                                               you provided a lot of discount that did not bring you any profit. Find the minimum discount such that 
+                                               you provided a lot of discount that did not bring you any profit. Find the minimum discount such that
                                                you will still earn and your competitor has no choice other than picking the same discount as yours."))
       } else {
         output$winMessage <- renderText(paste("You decided to provide a discount of ", as.character(df$Discount[(b * 2) + 1]), "% and you won  $", as.character(df$Profits[(b * 2) + 1] / 2),
@@ -532,7 +552,7 @@ server <- function(input, output, session) {
         than 60% discount will lead to profit loss causing your competitor to pick 60% discount as well. You should not provide more than 60% either
         because the profits are less than 0 for any discount more than 60%."))
       }
-      
+
     } else {
       # preventing reactivity
       b <- isolate(as.numeric(input$picker_2))
@@ -554,12 +574,13 @@ server <- function(input, output, session) {
         output$winMessage <- renderText(paste("You decided to provide a discount of ", as.character(df$Discount[(b * 2) + 1]), "% and you won  $", as.character(df$Profits[(b * 2) + 1] / 2),
                                               " USD in profits.Tropical Inc profited $", as.character(df$Profits[(6 * 2) + 1] / 2), " USD. Congrats! You found the optimal solution!"))
       }
-      
+
     }
   })
-  
-  
+
+
 }
 
 # Run the application
 shinyApp(ui = ui, server = server)
+
