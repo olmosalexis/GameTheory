@@ -30,7 +30,7 @@ ui <- fluidPage(
     id = "navbar",
     actionButton("h_button", HTML('<img src="puzzle.png", height="15px", width="15px"
           style="float:right"/>', '<p style="color:black"></p>')),
-   
+    
     tabPanel(
       "Home",
       fluidRow(
@@ -68,38 +68,38 @@ ui <- fluidPage(
         tags$footer(align = "center", shiny::HTML("<p>Copyright © 2022-2023 Game Theory Group CSC-324 Fall  : Made with <3 in Grinnell, Iowa</p>"))
       ),
       tabPanel(
-                                            "Level 2", br(),
-                                            sidebarLayout(
-                                              mainPanel(
-                                                shiny::HTML("<p><h4>Let's make it more interesting! Could you select the discount amount to
+        "Level 2", br(),
+        sidebarLayout(
+          mainPanel(
+            shiny::HTML("<p><h4>Let's make it more interesting! Could you select the discount amount to
                                                                      compete against Tropical Inc.? Take as a reference the table provided below and make a decision! Level 2 has two variations:
                                                                        Sequential or simultaneous game. Sequential means Tropical Inc. has complete information about your decision. Simultaneous means Tropical Inc will decide without knowing your move!
                                                                        </h4></p><br>"),
-                                                plotOutput("plot_discount"), tags$hr(), span(textOutput("lossMessage"), style="color:red"), 
-                                                span(textOutput("winMessage"), style="color:green"), span(textOutput("hintMessage"), style="color:blue"),
-                                                br(),br(),br(),br(),br(),
-                                                tags$footer(align = "center", shiny::HTML("<p>Copyright © 2022-2023 Game Theory Group CSC-324 Fall  : Made with <3 in Grinnell, Iowa</p>"))),
-                                              
-                                              sidebarPanel(
-                                                verticalLayout(
-                                                  prettyCheckbox(
-                                                    inputId = "pretty_1", label = "Sequential Game?", icon = icon("check")
-                                                  ),
-                                                  pickerInput(
-                                                    inputId = "picker_2",
-                                                    label = h4("Strategy selection:"),
-                                                    choices = c("No Discount" = 0, "10%" = 1, "20%" = 2, "30%" = 3, "40%" = 4, "50%" = 5, "60%" = 6, "70%" = 7, "80%" = 8, "90%" = 9, "100%" = 10),
-                                                    options = list(
-                                                      `live-search` = TRUE
-                                                    )
-                                                  ), splitLayout(
-                                                    actionButton("goButton_2", "Implement Changes", class = "btn-success"),
-                                                    actionButton("go", HTML('<img src="data_pic.png", height="30px"style="float:right"/>', '<p style="color:black"></p>'))
-                                                  )
-                                                )
-                                              ),
-                                            )
-                                          ),
+            plotOutput("plot_discount"), tags$hr(), span(textOutput("lossMessage"), style="color:red"), 
+            span(textOutput("winMessage"), style="color:green"), span(textOutput("hintMessage"), style="color:blue"),
+            br(),br(),br(),br(),br(),
+            tags$footer(align = "center", shiny::HTML("<p>Copyright © 2022-2023 Game Theory Group CSC-324 Fall  : Made with <3 in Grinnell, Iowa</p>"))),
+          
+          sidebarPanel(
+            verticalLayout(
+              prettyCheckbox(
+                inputId = "pretty_1", label = "Sequential Game?", icon = icon("check")
+              ),
+              pickerInput(
+                inputId = "picker_2",
+                label = h4("Strategy selection:"),
+                choices = c("No Discount" = 0, "10%" = 1, "20%" = 2, "30%" = 3, "40%" = 4, "50%" = 5, "60%" = 6, "70%" = 7, "80%" = 8, "90%" = 9, "100%" = 10),
+                options = list(
+                  `live-search` = TRUE
+                )
+              ), splitLayout(
+                actionButton("goButton_2", "Implement Changes", class = "btn-success"),
+                actionButton("go", HTML('<img src="data_pic.png", height="30px"style="float:right"/>', '<p style="color:black"></p>'))
+              )
+            )
+          ),
+        )
+      ),
       tabPanel("Level 3"),
       
     )),
@@ -139,7 +139,9 @@ ui <- fluidPage(
           br(),
           actionButton("d_button", HTML('<img src="design.png",  height = "150px", width = "300px", style="float:right"/>', '<p style="color:black"></p>')),
           shiny::HTML(" "),
-          actionButton("r_button", HTML('<img src="header.png",  height = "150px", width = "300px", style="float:right"/>', '<p style="color:black"></p>')),
+          actionButton("r_button", HTML('<img src="research.png",  height = "150px", width = "300px", style="float:right"/>', '<p style="color:black"></p>')),
+          shiny::HTML(" "),
+          actionButton("a_button", HTML('<img src="acknowledgement.png",  height = "150px", width = "300px", style="float:right"/>', '<p style="color:black"></p>')),
           
         ),
         tabPanel(
@@ -170,7 +172,7 @@ ui <- fluidPage(
                 The user sees the home page as the first page when they open the app.
                 <br><br><li> We also made it so that when the user clicks the back button on the browser,
                 they are taken to the home page.</h4>")
-
+              
             ),
             column(1)
           ),
@@ -267,15 +269,15 @@ ui <- fluidPage(
         ),
         
         tabPanel(
-          "Acknowledgments",
-          id="acknowledgments",
+          "Acknowledgements",
+          id="Acknowledgements",
           shiny::HTML("<br><center><h2>Acknowledge</h2></center><br>")
         )
         
         
       )
     )
-
+    
   )
 )
 
@@ -375,11 +377,15 @@ server <- function(input, output, session) {
     updateTabsetPanel(session, "processes",selected = "Research Process")
   })
   
-  
+  observeEvent(input$a_button, {
+    updateTabsetPanel(session, "processes",selected = "Acknowledgements")
+  })
   
   observeEvent(input$h_button, {
     updateNavbarPage(session, "navbar",selected = "Home")
   })
+  
+  
   
   observeEvent(input$goButton_2, {
     if (input$pretty_1 == TRUE) {
