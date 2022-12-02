@@ -22,126 +22,94 @@ library(dplyr)
 # Define UI for application that draws a histogram
 ui <- fluidPage(
   theme = shinytheme("journal"),
-  tags$head(
+ tags$head(
     tags$link(rel="icon", type="image/png", href = "header.png"),
     tags$title("Game Theory Fall 2022")
   ),
-  navbarPage(
-    title = list(
-      tags$head(tags$style()),
-      HTML('<img src="puzzle.png", height="30px"
-          style="float:right"/>', '<p style="color:black"></p>')
-    ),
-    tabPanel(
-      "Home",
-      fluidRow(
-        shiny::HTML("<br><center> <h1>Game Theory Group!<h1> </center><br>"),
-        div(img(src = "puzzle.png", height = "100px"), style = "text-align: center;"),
-        tags$hr(),
-        column(
-          12,
-          shiny::HTML("<center> <h2>What you'll find here</h2> </center><br>"),
-          shiny::HTML("<center><h4>An interactive tool to help you explore your interest in Game theory games or even
-                                                        just get to know about this topic for the first time.</center></h4>"),
-          br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),
-          tags$footer(align = "center", shiny::HTML("Copyright © 2022-2023 Game Theory Group CSC-324 Fall  : Made with <3 in Grinnell, Iowa"), style = "position:absolute;bottom:0;width:95%;height:50px; /* Height of the footer */color: black;padding: 0px;background-color: white;z-index: 1000;")
-        )
-      )
-    ),
-    tabPanel("Game", tabsetPanel(
-      type = "tabs",
-      tabPanel(
-        "Level 1", br(),
-        sidebarLayout(
-          mainPanel(shiny::HTML("<p> <h4>Scenario: You are one of the most well-known CEOs in America running a retail company.
-                                                      Your store in Grinnell is competing only against another retail company named Tropical Inc. You have two options:
-                                                      Apply discounts for Thanksgiving or not. But you do not know your rival's decision. Can you make a better decision than your competitor?
-                                                      (Lets apply game theory)</h4></p><br>"), uiOutput("matrix"), textOutput("mytext_1")),
-          sidebarPanel(
-            radioGroupButtons(
-              inputId = "radio_discount",
-              label = h4("Strategy selection:"),
-              choices = c("Discount" = "existYes", "No discount" = "existNo"),
-              status = "primary"
-            ), actionButton("goButton", "Implement Changes", class = "btn-success")
-          )
-        ), br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),
-        tags$footer(align = "center", shiny::HTML("<p>Copyright © 2022-2023 Game Theory Group CSC-324 Fall  : Made with <3 in Grinnell, Iowa</p>"))
-      ),
-      tabPanel(
-        "Level 2", br(),
-        sidebarLayout(
-          mainPanel(
-            shiny::HTML("<p><h4>Let's make it more interesting! Could you select the discount amount to
+                navbarPage(title=list(tags$head(tags$style()), 
+                                       HTML('<img src="puzzle.png", height="30px"    
+          style="float:right"/>','<p style="color:black"></p>')),
+                          tabPanel("Home",
+                                   fluidRow(
+                                     shiny::HTML("<br><br><center> <h1>Game Theory Group!<h1> </center><br>"),
+                                     div(img(src="puzzle.png",height="100px"), style="text-align: center;"),
+                                     tags$hr(),
+                                     column(3),
+                                     column(6,
+                                            shiny::HTML("<br><br><center> <h2>What you'll find here</h2> </center><br>"),
+                                            shiny::HTML("<center><h4>An interactive tool to help you explore your interest in Game theory games or even 
+                                                        just get to know about this topic for the first time.</center></h4>")
+                                     ),
+                                     column(3)
+                                   )),
+                           tabPanel("Game", tabsetPanel(type = "tabs",
+                                                        tabPanel("Level 1", br(),
+                           
+                                    sidebarLayout(
+                                      mainPanel(shiny::HTML("<p> <h4>Scenario: You are one of the most well known CEOs in America running a retail company. 
+                                                      Your store in Grinnell is competing only against another retail company named Tropical Inc.You have two options: 
+                                                      Apply discounts for Thanksgiving or not. But you do not know your rival's decision. Can you make a better decision than your competitor? 
+                                                      (Lets apply game theory)<h4><p><br>") ,uiOutput('matrix'), textOutput("mytext_1")),
+                                      sidebarPanel(
+                                      radioGroupButtons(
+                                        inputId = "radio_discount",
+                                        label = h4("Strategy selection:"), 
+                                        choices = c("Discount"="existYes","No discount"="existNo"),
+                                        status = "primary"
+                                      ),actionButton("goButton", "Implement Changes", class = "btn-success"))
+                                    )),
+                                    tabPanel(
+                                      "Level 2", br(),
+                                      sidebarLayout(
+                                        mainPanel(
+                                          shiny::HTML("<p><h4>Let's make it more interesting! Could you select the discount amount to
                                                                      compete against Tropical Inc.? Take as a reference the table provided below and make a decision! Level 2 has two variations:
                                                                        Sequential or simultaneous game. Sequential means Tropical Inc. has complete information about your decision. Simultaneous means Tropical Inc will decide without knowing your move!
                                                                        </h4></p><br>"),
-            plotOutput("plot_discount"), tags$hr(), textOutput("mytext_2"), 
-            br(),br(),br(),br(),br(),
-            tags$footer(align = "center", shiny::HTML("<p>Copyright © 2022-2023 Game Theory Group CSC-324 Fall  : Made with <3 in Grinnell, Iowa</p>"))),
-          
-          sidebarPanel(
-            verticalLayout(
-              prettyCheckbox(
-                inputId = "pretty_1", label = "Sequential Game?", icon = icon("check")
-              ),
-              pickerInput(
-                inputId = "picker_2",
-                label = h4("Strategy selection:"),
-                choices = c("No Discount" = 0, "10%" = 1, "20%" = 2, "30%" = 3, "40%" = 4, "50%" = 5, "60%" = 6, "70%" = 7, "80%" = 8, "90%" = 9, "100%" = 10),
-                options = list(
-                  `live-search` = TRUE
-                )
-              ), splitLayout(
-                actionButton("goButton_2", "Implement Changes", class = "btn-success"),
-                actionButton("go", HTML('<img src="data_pic.png", height="30px"style="float:right"/>', '<p style="color:black"></p>'))
-              )
-            )
-          )
-        )
-      ),
-      tabPanel("Level 3"),
-      
-    )),
-    tabPanel(
-      "Catalog",
-      mainPanel(
-        column(2),
-        column(
-          8,
-          h2("List of Games"),
-          DT::dataTableOutput("mytable"),
-          shiny::HTML("<b>Column Name Descriptions</b><br>
-                                                  <b>Player:</b> The number of players needed for the game<br>
-                                                  <b>Strategies.per.player:</b> The number of strategies available
-                                                  for each player<br>
-                                                  <b>Number.of.pure.strategy.Nash.equilibria:</b> The number of
-                                                  possible nash equilibrium situations<br>
-                                                  <b>Sequential:</b> Whether the game is sequential or not<br>
-                                                  <b>Perfect Information:</b> The game is sequential, and every player
-                                                  knows the actions of previous players.<br>
-                                                  <b>Constant Sum:</b>Whether one player gains if and only if another
-                                                  player loses.<br><br><br><br>
-                                                  "),
-          tags$footer(align = "center", shiny::HTML("<br>Copyright © 2022-2023 Game Theory Group CSC-324 Fall  : Made with <3 in Grinnell, Iowa"), style = "position:absolute;bottom:0;width:95%;height:50px; /* Height of the footer */color: black;padding: 0px;background-color: white;z-index: 1000;")
-        ), column(2)
-      )
-    ),
-    tabPanel(
-      "Process",
-      fluidRow(
-        shiny::HTML("<center> <h1>DESIGN PROCESS<h1> </center>"),
-        div(img(src = "design.png", height = "100px"), style = "text-align: center;"),
-        tags$hr(),
-        column(1),
-        column(
-          10,
-          shiny::HTML("<br><center><h2>Usage of wireframe and screen mockup</h2></center><br>"),
-          shiny::HTML("<h4>
-
-                                             <ul><li>At first, we were still determining how we wished to present
-                our data but making a wireframe and screen mockup helped us
-                visualize what we wanted to do and then perform the
+                                          plotOutput("plot_discount"), tags$hr(), span(textOutput("lossMessage"), style="color:red"), 
+                                          span(textOutput("winMessage"), style="color:green"), span(textOutput("hintMessage"), style="color:blue"),
+                                          br(),br(),br(),br(),br(),
+                                          tags$footer(align = "center", shiny::HTML("<p>Copyright © 2022-2023 Game Theory Group CSC-324 Fall  : Made with <3 in Grinnell, Iowa</p>"))),
+                                        
+                                        sidebarPanel(
+                                          verticalLayout(
+                                            prettyCheckbox(
+                                              inputId = "pretty_1", label = "Sequential Game?", icon = icon("check")
+                                            ),
+                                            pickerInput(
+                                              inputId = "picker_2",
+                                              label = h4("Strategy selection:"),
+                                              choices = c("No Discount" = 0, "10%" = 1, "20%" = 2, "30%" = 3, "40%" = 4, "50%" = 5, "60%" = 6, "70%" = 7, "80%" = 8, "90%" = 9, "100%" = 10),
+                                              options = list(
+                                                `live-search` = TRUE
+                                              )
+                                            ), splitLayout(
+                                              actionButton("goButton_2", "Implement Changes", class = "btn-success"),
+                                              actionButton("go", HTML('<img src="data_pic.png", height="30px"style="float:right"/>', '<p style="color:black"></p>'))
+                                            )
+                                          )
+                                        ),
+                                      )
+                                    ),
+                                    tabPanel("Level 3"))),
+                           tabPanel("Catalog",
+                                    mainPanel(
+                                      h2("List of Games"),
+                                      DT::dataTableOutput("mytable")
+                                    )),
+                           tabPanel("Process",
+                                    fluidRow(
+                                      shiny::HTML("<br><br><center> <h1>DESIGN PROCESS<h1> </center><br>"),
+                                      div(img(src="design.png",height="100px"), style="text-align: center;"),
+                                      tags$hr(),
+                                      column(3),
+                                      column(6,
+                                             shiny::HTML("<br><br><center> <h2>Usage of wireframe and screen mockup</h2> </center><br>"),
+                                             shiny::HTML("<center><h4>
+                                            
+                                             <ul><li>At first, we were unsure about how we wished to present
+                our data but making a wireframe and screen mockup helped us a
+                lot in visualizing what we wanted to do and then perform the
                 tasks in a given order.  <br><br><li>We decided to use game theory to create
                 this game because it is a straightforward yet interesting concept.
                 We wanted to make a game that was not only fun but also educational.
@@ -374,6 +342,70 @@ server <- function(input, output) {
       })
     }
   })
+    }
+    
+    
+  })
+  
+  
+  
+  
+  observeEvent(input$goButton_2, {
+    output$lossMessage <- renderText("")
+    output$winMessage <- renderText("")
+    output$hintMessage <- renderText("")
+    if (input$pretty_1 == TRUE) {
+      b <- isolate(as.numeric(input$picker_2))
+      if (b < 6) {
+        output$lossMessage  <- renderText(paste("Oh No! TRY AGAIN! You decided to provide a discount of ", as.character(df$Discount[(b * 2) + 1]), "%.
+             You lost the price war and made $0 USD profit. Tropical Inc profited $", as.character(df$Profits[(b * 2) + 3])," USD."))
+        output$hintMessage <- renderText(paste("Hint: We highly recommend checking out the table of discounts and potential profits.
+                                               You can access the table by clicking on the folder button next to the green implement button.
+                                               You lost because you decided to give less discount than your competitior. How can you maximize
+                                               your earnings given that your opponent already knows your decision? Avoid loss as much as possible. What is
+                                               the minimum discount you can give that will leave your competitive with no option other than picking the same
+                                               discount as yours?"))
+      }  else if (b > 6) {
+        output$lossMessage <- renderText(paste("TRY AGAIN! You won the price war! But a discount of ", as.character(df$Discount[(b * 2) + 1]), "% led to a loss of $",
+                                               as.character(df$Profits[(b * 2) + 1]), " USD. On the flip side Tropical Inc profited $ 0 USD."))
+        output$hintMessage <- renderText(paste("Hint: We highly recommend checking out the table of discounts and potential profits.
+                                               You can access the table by clicking on the folder button next to the green implement button. You lost because
+                                               you provided a lot of discount that did not bring you any profit. Find the minimum discount such that 
+                                               you will still earn and your competitor has no choice other than picking the same discount as yours."))
+      } else {
+        output$winMessage <- renderText(paste("You decided to provide a discount of ", as.character(df$Discount[(b * 2) + 1]), "% and you won  $", as.character(df$Profits[(b * 2) + 1] / 2),
+                                              " USD in profits.Tropical Inc profited $", as.character(df$Profits[(6 * 2) + 1] / 2), " USD. Congrats! You found the optimal solution! You won
+        because 60% is the minimum discount give that will leave no choice for your competitor to offer a better deal than yours. Anything more
+        than 60% discount will lead to profit loss causing your competitor to pick 60% discount as well. You should not provide more than 60% either
+        because the profits are less than 0 for any discount more than 60%."))
+      }
+      
+    } else {
+      # preventing reactivity
+      b <- isolate(as.numeric(input$picker_2))
+      if (b < 6) {
+        output$lossMessage <- renderText(paste("You decided to provide a discount of ", as.character(df$Discount[(b * 2) + 1]), "%.
+           You lost the price war and made $0 USD profit. Tropical Inc profited $", as.character(df$Profits[(6 * 2) + 1]), " USD. Try Again!"))
+        output$hintMessage <- renderText(paste("Hint: Look at the table next to the green implement button. You should provide more
+        discount because the competitor collected all the profits by providing more discoun than you do. Without knowing your decision,
+                                               the computer picked a discount amount so that they will still profit but making it impossible
+                                               for you to profit more than them. What is this discount amount?"))
+      } else if (b > 6) {
+        output$lossMessage <- renderText(paste("You won the price war! But a discount of ", as.character(df$Discount[(b * 2) + 1]), "% led to a loss of $",
+                                               as.character(df$Profits[(b * 2) + 1]), " USD. On the flip side Tropical Inc profited $ 0 USD. Try Again!"))
+        output$hintMessage <- renderText(paste("Hint: You provided excessive discount causing you to make negative profit.
+                                               Look at the table next to the green button. Which discount amount is causing you
+                                               to make profit and is the safest choice such that you will not earn less than your
+                                               competitor."))
+      } else {
+        output$winMessage <- renderText(paste("You decided to provide a discount of ", as.character(df$Discount[(b * 2) + 1]), "% and you won  $", as.character(df$Profits[(b * 2) + 1] / 2),
+                                              " USD in profits.Tropical Inc profited $", as.character(df$Profits[(6 * 2) + 1] / 2), " USD. Congrats! You found the optimal solution!"))
+      }
+      
+    }
+  })
+  
+ 
 }
 
 # Run the application
