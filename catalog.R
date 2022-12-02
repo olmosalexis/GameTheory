@@ -89,7 +89,7 @@ box <- function(name, t) {
 merge <- function(t, link) {
   # cat(link);
   if (is.null(link)) {
-    return(paste0("<a href=\"https://www.google.com\">", t, "</a>"));
+    return(paste0("<a href=\"https://www.google.com\"  target=_blank rel=noopener noreferrer>", t, "</a>"));
   }
   return(paste0("<a href=\"", link, "\">", t, "</a>"));
 }
