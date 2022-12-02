@@ -265,17 +265,18 @@ server <- function(input, output, session) {
   })
 
   observeEvent(input$game, {
-    print("Sdasdasd")
     if (input$game != '0') {
       g <- tb %>% filter(index == input$game)
       print(g);
-      # input$game = 0;
+
+      # updateTextInput(session, 'game', value='0');
       shinyalert(g$Game,tags$div(style="display: flex;", g$Players, shiny::HTML(paste0("<a href=\"",g$link,"\"  target=_blank rel=noopener noreferrer>Learn more</a>"))),
                  html=TRUE,
                  # type='info',
-                 # callbackJS = "Shiny.Shiny.setInputValue('reset', 1);",
-                # callbackR = function() {updateTextInput(session, 'game', '0')}
+                # callbackJS = "Shiny.setInputValue('game', '0');",
+                  # callbackR = function() {updateTextInput(session, ig, value='0')}
                  )
+      updateTextInput(session, 'game', value='0');
     }
   })
   
