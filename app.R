@@ -53,29 +53,39 @@ ui <- fluidPage(
                                         status = "primary"
                                       ),actionButton("goButton", "Implement Changes", class = "btn-success"))
                                     )),
-                                    tabPanel("Level 2",br(),
-                                             sidebarLayout(
-                                               mainPanel(shiny::HTML("<p><h4>Lets make it more interesting! What if you could select the discount amount to 
-                                                                     compete against Tropical Inc.? Take as a reference the table provided below and make a decision! Level 2 has two variations: 
-                                                                       Sequential or simultaneus game. Sequential means Tropical Inc. has full information of yourr decision. Simultaneous means Tropical Inc will make a decision without knowing your move!
-                                                                       <h4> <p><br>"),
-                                                         plotOutput("plot_discount"),tags$hr(),textOutput("mytext_2")),
-                                               sidebarPanel(
-                                                 verticalLayout(
-                                                   prettyCheckbox(
-                                                     inputId = "pretty_1", label = "Sequential Game?", icon = icon("check")
-                                                   ),
-                                                 pickerInput(
-                                                   inputId = "picker_2",
-                                                   label = h4("Strategy selection:"), 
-                                                   choices = c("No Discount"=0,"10%"=1,"20%"=2,"30%"=3,"40%"=4,"50%"=5,"60%"=6,"70%"=7,"80%"=8,"90%"=9,"100%"=10),
-                                                   options = list(
-                                                     `live-search` = TRUE)
-                                                 ),splitLayout(
-                                                 actionButton("goButton_2", "Implement Changes", class = "btn-success"),
-                                                 actionButton("go", HTML('<img src="data_pic.png", height="30px"style="float:right"/>','<p style="color:black"></p>')))
-                                                 ))
-                                             )),
+                                    tabPanel(
+                                      "Level 2", br(),
+                                      sidebarLayout(
+                                        mainPanel(
+                                          shiny::HTML("<p><h4>Let's make it more interesting! Could you select the discount amount to
+                                                                     compete against Tropical Inc.? Take as a reference the table provided below and make a decision! Level 2 has two variations:
+                                                                       Sequential or simultaneous game. Sequential means Tropical Inc. has complete information about your decision. Simultaneous means Tropical Inc will decide without knowing your move!
+                                                                       </h4></p><br>"),
+                                          plotOutput("plot_discount"), tags$hr(), span(textOutput("lossMessage"), style="color:red"), 
+                                          span(textOutput("winMessage"), style="color:green"), span(textOutput("hintMessage"), style="color:blue"),
+                                          br(),br(),br(),br(),br(),
+                                          tags$footer(align = "center", shiny::HTML("<p>Copyright © 2022-2023 Game Theory Group CSC-324 Fall  : Made with <3 in Grinnell, Iowa</p>"))),
+                                        
+                                        sidebarPanel(
+                                          verticalLayout(
+                                            prettyCheckbox(
+                                              inputId = "pretty_1", label = "Sequential Game?", icon = icon("check")
+                                            ),
+                                            pickerInput(
+                                              inputId = "picker_2",
+                                              label = h4("Strategy selection:"),
+                                              choices = c("No Discount" = 0, "10%" = 1, "20%" = 2, "30%" = 3, "40%" = 4, "50%" = 5, "60%" = 6, "70%" = 7, "80%" = 8, "90%" = 9, "100%" = 10),
+                                              options = list(
+                                                `live-search` = TRUE
+                                              )
+                                            ), splitLayout(
+                                              actionButton("goButton_2", "Implement Changes", class = "btn-success"),
+                                              actionButton("go", HTML('<img src="data_pic.png", height="30px"style="float:right"/>', '<p style="color:black"></p>'))
+                                            )
+                                          )
+                                        ),
+                                      )
+                                    ),
                                     tabPanel("Level 3"))),
                            tabPanel("Catalog",
                                     mainPanel(
@@ -350,6 +360,65 @@ server <- function(input, output) {
     
     
   })
+  
+  
+  
+  
+  observeEvent(input$goButton_2, {
+    output$lossMessage <- renderText("")
+    output$winMessage <- renderText("")
+    output$hintMessage <- renderText("")
+    if (input$pretty_1 == TRUE) {
+      b <- isolate(as.numeric(input$picker_2))
+      if (b < 6) {
+        output$lossMessage  <- renderText(paste("Oh No! TRY AGAIN! You decided to provide a discount of ", as.character(df$Discount[(b * 2) + 1]), "%.
+             You lost the price war and made $0 USD profit. Tropical Inc profited $", as.character(df$Profits[(b * 2) + 3])," USD."))
+        output$hintMessage <- renderText(paste("Hint: We highly recommend checking out the table of discounts and potential profits.
+                                               You can access the table by clicking on the folder button next to the green implement button.
+                                               You lost because you decided to give less discount than your competitior. How can you maximize
+                                               your earnings given that your opponent already knows your decision? Avoid loss as much as possible. What is
+                                               the minimum discount you can give that will leave your competitive with no option other than picking the same
+                                               discount as yours?"))
+      }  else if (b > 6) {
+        output$lossMessage <- renderText(paste("TRY AGAIN! You won the price war! But a discount of ", as.character(df$Discount[(b * 2) + 1]), "% led to a loss of $",
+                                               as.character(df$Profits[(b * 2) + 1]), " USD. On the flip side Tropical Inc profited $ 0 USD."))
+        output$hintMessage <- renderText(paste("Hint: We highly recommend checking out the table of discounts and potential profits.
+                                               You can access the table by clicking on the folder button next to the green implement button. You lost because
+                                               you provided a lot of discount that did not bring you any profit. Find the minimum discount such that 
+                                               you will still earn and your competitor has no choice other than picking the same discount as yours."))
+      } else {
+        output$winMessage <- renderText(paste("You decided to provide a discount of ", as.character(df$Discount[(b * 2) + 1]), "% and you won  $", as.character(df$Profits[(b * 2) + 1] / 2),
+                                              " USD in profits.Tropical Inc profited $", as.character(df$Profits[(6 * 2) + 1] / 2), " USD. Congrats! You found the optimal solution! You won
+        because 60% is the minimum discount give that will leave no choice for your competitor to offer a better deal than yours. Anything more
+        than 60% discount will lead to profit loss causing your competitor to pick 60% discount as well. You should not provide more than 60% either
+        because the profits are less than 0 for any discount more than 60%."))
+      }
+      
+    } else {
+      # preventing reactivity
+      b <- isolate(as.numeric(input$picker_2))
+      if (b < 6) {
+        output$lossMessage <- renderText(paste("You decided to provide a discount of ", as.character(df$Discount[(b * 2) + 1]), "%.
+           You lost the price war and made $0 USD profit. Tropical Inc profited $", as.character(df$Profits[(6 * 2) + 1]), " USD. Try Again!"))
+        output$hintMessage <- renderText(paste("Hint: Look at the table next to the green implement button. You should provide more
+        discount because the competitor collected all the profits by providing more discoun than you do. Without knowing your decision,
+                                               the computer picked a discount amount so that they will still profit but making it impossible
+                                               for you to profit more than them. What is this discount amount?"))
+      } else if (b > 6) {
+        output$lossMessage <- renderText(paste("You won the price war! But a discount of ", as.character(df$Discount[(b * 2) + 1]), "% led to a loss of $",
+                                               as.character(df$Profits[(b * 2) + 1]), " USD. On the flip side Tropical Inc profited $ 0 USD. Try Again!"))
+        output$hintMessage <- renderText(paste("Hint: You provided excessive discount causing you to make negative profit.
+                                               Look at the table next to the green button. Which discount amount is causing you
+                                               to make profit and is the safest choice such that you will not earn less than your
+                                               competitor."))
+      } else {
+        output$winMessage <- renderText(paste("You decided to provide a discount of ", as.character(df$Discount[(b * 2) + 1]), "% and you won  $", as.character(df$Profits[(b * 2) + 1] / 2),
+                                              " USD in profits.Tropical Inc profited $", as.character(df$Profits[(6 * 2) + 1] / 2), " USD. Congrats! You found the optimal solution!"))
+      }
+      
+    }
+  })
+  
   
 }
 
