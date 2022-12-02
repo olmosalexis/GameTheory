@@ -123,9 +123,9 @@ ui <- fluidPage(
           
           shiny::HTML("<p style= color:black;font-size:100%;> For users interested in learning more beyond our tutorial, we'd 
                       recommend watching the following videos:</p> 
-                      &nbsp;&nbsp;&nbsp; <a href=https://www.youtube.com/watch?v=PCcVODWm-oY> Game Theory Crash Course</a><br>
-                      &nbsp;&nbsp;&nbsp; <a href=https://www.youtube.com/watch?v=MHS-htjGgSY> Game Theory Decision Making</a><br>
-                      &nbsp;&nbsp;&nbsp; <a href=https://www.youtube.com/watch?v=0i7p9DNvtjk> Nash Equilibrium</a>"),
+                      &nbsp;&nbsp;&nbsp; <a href=https://www.youtube.com/watch?v=PCcVODWm-oY target=_blank rel=noopener noreferrer> Game Theory Crash Course</a><br>
+                      &nbsp;&nbsp;&nbsp; <a href=https://www.youtube.com/watch?v=MHS-htjGgSY target=_blank rel=noopener noreferrer> Game Theory Decision Making</a><br>
+                      &nbsp;&nbsp;&nbsp; <a href=https://www.youtube.com/watch?v=0i7p9DNvtjk target=_blank rel=noopener noreferrer> Nash Equilibrium</a>"),
         ),
       ),
     ),
