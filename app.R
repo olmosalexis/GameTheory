@@ -18,10 +18,13 @@ library(ggplot2)
 library(shinydashboard)
 library(formattable)
 library(dplyr)
+
 source("catalog.R")
+source("box.R")
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
+  useShinyalert(),  
   theme = shinytheme("journal"),
   navbarPage(
     title = list(
@@ -232,8 +235,13 @@ server <- function(input, output) {
   df$x <- NULL
   df$Profits <- df$c.75..143.75..200..243.75..275..293.75..300..293.75..275..243.75..
   df$c.75..143.75..200..243.75..275..293.75..300..293.75..275..243.75.. <- NULL
-
-
+  tb <- read.csv("data_catalog_games.csv")
+  # add id to table
+  tb$index = 1:nrow(tb)
+  # add hyperlinks
+  tb$name <- merge(tb$Game, tb$link);
+  # game <- reactiveVal(0);
+  
 
   output$plot_discount <- renderPlot(
     ggplot(df, aes(Discount, Profits)) +
@@ -254,22 +262,44 @@ server <- function(input, output) {
     ))
   })
 
+  observeEvent(input$game, {
+    if (input$game != 0) {
+      g <- tb %>% filter(index == input$game)
+      print(g)
+      shinyalert(g$Game,tags$div(style="display: flex;", g$Players, shiny::HTML(paste0("<a href=\"",g$link,"\">Learn more</a>"))),
+                 html=TRUE,
+                 type='info',
+                 callbackR = Shiny.setInputValue('game', 0))
+    }
+  })
 
   output$table_discount <- renderTable(df)
 
   ## Reactivity from table
   selectdata <- reactive({
-    table <- read.csv("data_catalog_games.csv")
-    table <- select(table, c(-X))
+    return(tb %>% select(c('name', 'Players')))
+    ## dplyr::filter(nas1, nas1$industry %in% input$picker_sector & nas1$country %in% input$picker_country)
+  })
+  selectbox <- reactive({
+    return(tb %>% select(c('Game', 'Players', 'index')))
     ## dplyr::filter(nas1, nas1$industry %in% input$picker_sector & nas1$country %in% input$picker_country)
   })
 
   ## output table for games catalog
   output$mytable <- DT::renderDataTable({
     selectdata()
+  },escape = FALSE)
+  output$table <- renderUI(list_table());
+
+  # output$boxcard <- render
+
+  observeEvent(input$boxmode, {
+    t <- selectbox();
+    output$table <- renderUI(box_table(Map(boxCard, t$Game, t$Players, t$index, style="")));
   })
-
-
+  observeEvent(input$listmode, {
+    output$table <- renderUI(list_table());
+  })
   observeEvent(input$goButton, {
     output$matrix <- renderUI({
       HTML(
