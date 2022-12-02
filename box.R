@@ -18,7 +18,7 @@ boxCard <- function(title, content="", id="0", style="") {
                  style),
     id=id,
     onclick = sprintf(
-      "Shiny.setInputValue('game', '%d')", 
+      "Shiny.setInputValue('game', '%d');",
       id
     ) ,
     tags$div(

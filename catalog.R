@@ -10,7 +10,7 @@ library(ggplot2)
 library(shinydashboard)
 library(formattable)
 library(dplyr)
-
+library(shinyalert)
 
 list_table <- function() {
     tags$div(

@@ -18,6 +18,9 @@ library(ggplot2)
 library(shinydashboard)
 library(formattable)
 library(dplyr)
+library(shinyalert)
+library(promises)
+library(future)
 
 source("catalog.R")
 source("box.R")
@@ -224,7 +227,7 @@ ui <- fluidPage(
 
 
 # Define server logic required to draw a histogram
-server <- function(input, output) {
+server <- function(input, output, session) {
   discount <- function(n) {
     -((x / 2) - 15)^2 + 300
   }
@@ -240,8 +243,7 @@ server <- function(input, output) {
   tb$index = 1:nrow(tb)
   # add hyperlinks
   tb$name <- merge(tb$Game, tb$link);
-  # game <- reactiveVal(0);
-  
+  cmp <- reactiveVal(0);
 
   output$plot_discount <- renderPlot(
     ggplot(df, aes(Discount, Profits)) +
@@ -263,14 +265,23 @@ server <- function(input, output) {
   })
 
   observeEvent(input$game, {
-    if (input$game != 0) {
+    print("Sdasdasd")
+    if (input$game != '0') {
       g <- tb %>% filter(index == input$game)
-      print(g)
+      print(g);
+      # input$game = 0;
       shinyalert(g$Game,tags$div(style="display: flex;", g$Players, shiny::HTML(paste0("<a href=\"",g$link,"\">Learn more</a>"))),
                  html=TRUE,
-                 type='info',
-                 callbackR = Shiny.setInputValue('game', 0))
+                 # type='info',
+                 # callbackJS = "Shiny.Shiny.setInputValue('reset', 1);",
+                # callbackR = function() {updateTextInput(session, 'game', '0')}
+                 )
     }
+  })
+  
+  observeEvent(input$reset, {
+    print(sprintf("game: %d", input$game))
+    # updateNumericInput(session, 'game', 0);
   })
 
   output$table_discount <- renderTable(df)
