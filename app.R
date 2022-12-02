@@ -27,11 +27,10 @@ ui <- fluidPage(
     tags$title("Game Theory Fall 2022")
   ),
   navbarPage(
-    title = list(
-      tags$head(tags$style()),
-      HTML('<img src="puzzle.png", height="30px"
-          style="float:right"/>', '<p style="color:black"></p>')
-    ),
+    id = "navbar",
+    actionButton("h_button", HTML('<img src="puzzle.png", height="15px", width="15px"
+          style="float:right"/>', '<p style="color:black"></p>')),
+   
     tabPanel(
       "Home",
       fluidRow(
@@ -134,6 +133,7 @@ ui <- fluidPage(
       
       tabsetPanel(
         id = "processes",
+        type = "pills",
         tabPanel(
           "Process & Acknowledgement",
           br(),
@@ -283,7 +283,7 @@ ui <- fluidPage(
 
 
 
-# Define server logic required to draw a histogram
+# Define server logic 
 server <- function(input, output, session) {
   discount <- function(n) {
     -((x / 2) - 15)^2 + 300
@@ -352,13 +352,6 @@ server <- function(input, output, session) {
       )
     })
     
-    observeEvent(input$d_button, {
-      updateTabsetPanel(session, "processes",selected = "Design Process")
-    })
-    
-    observeEvent(input$r_button, {
-      updateTabsetPanel(session, "processes",selected = "Research Process")
-    })
     
     
     # Text output response--> Question1
@@ -372,6 +365,20 @@ server <- function(input, output, session) {
         "You decided to not provide discount, therefore you collected 0% of the sales for Thanksgiving "
       }
     })
+  })
+  
+  observeEvent(input$d_button, {
+    updateTabsetPanel(session, "processes",selected = "Design Process")
+  })
+  
+  observeEvent(input$r_button, {
+    updateTabsetPanel(session, "processes",selected = "Research Process")
+  })
+  
+  
+  
+  observeEvent(input$h_button, {
+    updateNavbarPage(session, "navbar",selected = "Home")
   })
   
   observeEvent(input$goButton_2, {
