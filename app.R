@@ -28,14 +28,14 @@ ui <- fluidPage(
   ),
   navbarPage(
     id = "navbar",
-    actionButton("h_button", HTML('<img src="puzzle.png", height="15px", width="15px"
+    actionButton("h_button", HTML('<img src="header.png", height="15px", width="15px"
           style="float:right"/>', '<p style="color:black"></p>')),
     
     tabPanel(
       "Home",
       fluidRow(
         shiny::HTML("<br><center> <h1>Game Theory Group!<h1> </center><br>"),
-        div(img(src = "puzzle.png", height = "100px"), style = "text-align: center;"),
+        div(img(src = "header.png", height = "100px"), style = "text-align: center;"),
         tags$hr(),
         column(
           12,
