@@ -24,10 +24,10 @@ source("box.R")
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
-
+  
   theme = shinytheme("journal"),
   useShinyalert(),
- tags$head(
+  tags$head(
     tags$link(rel="icon", type="image/png", href = "header.png"),
     tags$title("Game Theory Fall 2022")
   ),
@@ -35,19 +35,19 @@ ui <- fluidPage(
     id = "navbar",
     actionButton("h_button", HTML('<img src="header.png", height="15px", width="15px"
           style="float:right"/>', '<p style="color:black"></p>')),
-                          tabPanel("Home",
-                                   fluidRow(
-                                     shiny::HTML("<br><br><center> <h1>Game Theory Group!<h1> </center><br>"),
-                                     div(img(src="puzzle.png",height="100px"), style="text-align: center;"),
-                                     tags$hr(),
-                                     column(12,
-          shiny::HTML("<center> <h4 style= color:#696969>E-learning platform powered by the Game Theory Group.</h4> </center>"),
-          shiny::HTML("<center><h3>We provide a user-friendly interactive tool that allows users to learn more about
+    tabPanel("Home",
+             fluidRow(
+               shiny::HTML("<br><br><center> <h1>Game Theory Group!<h1> </center><br>"),
+               div(img(src="header.png",height="100px"), style="text-align: center;"),
+               tags$hr(),
+               column(12,
+                      shiny::HTML("<center> <h4 style= color:#696969>E-learning platform powered by the Game Theory Group.</h4> </center>"),
+                      shiny::HTML("<center><h3>We provide a user-friendly interactive tool that allows users to learn more about
           Game Theory through a tutorial and example game simulations for further Game Theory exploration.</h3><br></center>"),
-          br(), br(), br(), br(), br(), br(), br(), br(), br(), br(), br(), br(), br(), br(), br(),
-          tags$footer(align = "center", shiny::HTML("Copyright © 2022-2023 Game Theory Group CSC-324 Fall  : Made with <3 in Grinnell, Iowa"), style = "position:absolute;bottom:0;width:95%;height:50px; /* Height of the footer */color: black;padding: 0px;background-color: white;z-index: 1000;")
-        )
-      )
+                      br(), br(), br(), br(), br(), br(), br(), br(), br(), br(), br(), br(), br(), br(), br(),
+                      tags$footer(align = "center", shiny::HTML("Copyright © 2022-2023 Game Theory Group CSC-324 Fall  : Made with <3 in Grinnell, Iowa"), style = "position:absolute;bottom:0;width:95%;height:50px; /* Height of the footer */color: black;padding: 0px;background-color: white;z-index: 1000;")
+               )
+             )
     ),
     tabPanel(
       "Tutorial",
@@ -111,60 +111,60 @@ ui <- fluidPage(
         ),
       ),
     ),
-                           tabPanel("Game", tabsetPanel(type = "tabs",
-                                                        tabPanel("Level 1", br(),
-
-                                    sidebarLayout(
-          mainPanel(shiny::HTML("<p> <h4>Scenario: You are one of the most well-known CEOs in America running a retail company.
+    tabPanel("Game", tabsetPanel(type = "tabs",
+                                 tabPanel("Level 1", br(),
+                                          
+                                          sidebarLayout(
+                                            mainPanel(shiny::HTML("<p> <h4>Scenario: You are one of the most well-known CEOs in America running a retail company.
                                                       Your store in Grinnell is competing only against another retail company named Tropical Inc. You have two options:
                                                       Apply discounts for Thanksgiving or not. But you do not know your rival's decision. Can you make a better decision than your competitor?
                                                       (Lets apply game theory)</h4></p><br>"), uiOutput("matrix"), textOutput("mytext_1")),
-                                      sidebarPanel(
-                                      radioGroupButtons(
-                                        inputId = "radio_discount",
-                                        label = h4("Strategy selection:"),
-                                        choices = c("Discount"="existYes","No discount"="existNo"),
-                                        status = "primary"
-                                      ),actionButton("goButton", "Implement Changes", class = "btn-success"))
-                                    )
-        #                             , br(), br(), br(), br(), br(), br(), br(), br(), br(), br(), br(), br(), br(), br(), br(), br(), br(), br(), br(), br(), br(), br(), br(), br(), br(),
-        # tags$footer(align = "center", shiny::HTML("<p>Copyright © 2022-2023 Game Theory Group CSC-324 Fall  : Made with <3 in Grinnell, Iowa</p>"))
-      ),
-                                    tabPanel(
-                                      "Level 2", br(),
-                                      sidebarLayout(
-                                        mainPanel(
-                                          shiny::HTML("<p><h4>Let's make it more interesting! Could you select the discount amount to
+                                            sidebarPanel(
+                                              radioGroupButtons(
+                                                inputId = "radio_discount",
+                                                label = h4("Strategy selection:"),
+                                                choices = c("Discount"="existYes","No discount"="existNo"),
+                                                status = "primary"
+                                              ),actionButton("goButton", "Implement Changes", class = "btn-success"))
+                                          )
+                                          #                             , br(), br(), br(), br(), br(), br(), br(), br(), br(), br(), br(), br(), br(), br(), br(), br(), br(), br(), br(), br(), br(), br(), br(), br(), br(),
+                                          # tags$footer(align = "center", shiny::HTML("<p>Copyright © 2022-2023 Game Theory Group CSC-324 Fall  : Made with <3 in Grinnell, Iowa</p>"))
+                                 ),
+                                 tabPanel(
+                                   "Level 2", br(),
+                                   sidebarLayout(
+                                     mainPanel(
+                                       shiny::HTML("<p><h4>Let's make it more interesting! Could you select the discount amount to
                                                                      compete against Tropical Inc.? Take as a reference the table provided below and make a decision! Level 2 has two variations:
                                                                        Sequential or simultaneous game. Sequential means Tropical Inc. has complete information about your decision. Simultaneous means Tropical Inc will decide without knowing your move!
                                                                        </h4></p><br>"),
-                                          plotOutput("plot_discount"), tags$hr(), span(textOutput("lossMessage"), style="color:red"),
-                                          span(textOutput("winMessage"), style="color:green"), span(textOutput("hintMessage"), style="color:blue"),
-                                          br(),br(),br(),br(),br(),
-                                          tags$footer(align = "center", shiny::HTML("<p>Copyright © 2022-2023 Game Theory Group CSC-324 Fall  : Made with <3 in Grinnell, Iowa</p>"))),
-
-                                        sidebarPanel(
-                                          verticalLayout(
-                                            prettyCheckbox(
-                                              inputId = "pretty_1", label = "Sequential Game?", icon = icon("check")
-                                            ),
-                                            pickerInput(
-                                              inputId = "picker_2",
-                                              label = h4("Strategy selection:"),
-                                              choices = c("No Discount" = 0, "10%" = 1, "20%" = 2, "30%" = 3, "40%" = 4, "50%" = 5, "60%" = 6, "70%" = 7, "80%" = 8, "90%" = 9, "100%" = 10),
-                                              options = list(
-                                                `live-search` = TRUE
-                                              )
-                                            ), splitLayout(
-                                              actionButton("goButton_2", "Implement Changes", class = "btn-success"),
-                                              actionButton("go", HTML('<img src="data_pic.png", height="30px"style="float:right"/>', '<p style="color:black"></p>'))
-                                            )
-                                          )
-                                        ),
-                                      )
-                                    ),
-                                    tabPanel("Level 3"))),
-                            catalog,
+                                       plotOutput("plot_discount"), tags$hr(), span(textOutput("lossMessage"), style="color:red"),
+                                       span(textOutput("winMessage"), style="color:green"), span(textOutput("hintMessage"), style="color:blue"),
+                                       br(),br(),br(),br(),br(),
+                                       tags$footer(align = "center", shiny::HTML("<p>Copyright © 2022-2023 Game Theory Group CSC-324 Fall  : Made with <3 in Grinnell, Iowa</p>"))),
+                                     
+                                     sidebarPanel(
+                                       verticalLayout(
+                                         prettyCheckbox(
+                                           inputId = "pretty_1", label = "Sequential Game?", icon = icon("check")
+                                         ),
+                                         pickerInput(
+                                           inputId = "picker_2",
+                                           label = h4("Strategy selection:"),
+                                           choices = c("No Discount" = 0, "10%" = 1, "20%" = 2, "30%" = 3, "40%" = 4, "50%" = 5, "60%" = 6, "70%" = 7, "80%" = 8, "90%" = 9, "100%" = 10),
+                                           options = list(
+                                             `live-search` = TRUE
+                                           )
+                                         ), splitLayout(
+                                           actionButton("goButton_2", "Implement Changes", class = "btn-success"),
+                                           actionButton("go", HTML('<img src="data_pic.png", height="30px"style="float:right"/>', '<p style="color:black"></p>'))
+                                         )
+                                       )
+                                     ),
+                                   )
+                                 )
+    )),
+    catalog,
     tabPanel(
       "Process",
       tabsetPanel(
@@ -313,8 +313,8 @@ ui <- fluidPage(
 
 
 
-# Define server logic required to draw a histogram
-server <- function(input, output) {
+# Define server logic
+server <- function(input, output, session) {
   discount <- function(n) {
     -((x / 2) - 15)^2 + 300
   }
@@ -325,14 +325,14 @@ server <- function(input, output) {
   df$x <- NULL
   df$Profits <- df$c.75..143.75..200..243.75..275..293.75..300..293.75..275..243.75..
   df$c.75..143.75..200..243.75..275..293.75..300..293.75..275..243.75.. <- NULL
-
+  
   table <- read.csv("data_catalog_games.csv")
   tb <- read.csv("data_catalog_games.csv")
   # add id to table
   tb$index <- 1:nrow(tb)
   # add hyperlinks
   tb$name <- merge(tb$Game, tb$link)
-
+  
   output$plot_discount <- renderPlot(
     ggplot(df, aes(Discount, Profits)) +
       geom_point() +
@@ -342,9 +342,9 @@ server <- function(input, output) {
       xlab(TeX("Discount Amount: $n\\%$")) +
       labs(title = TeX("Discount Function: $\\Pi(n)$: $-\\left(\\frac{n}{2}-15\\right)^{2}+300$")) +
       ggeasy::easy_center_title()
-
+    
   )
-
+  
   observeEvent(input$go, {
     showModal(modalDialog(
       tableOutput("table_discount"),
@@ -352,21 +352,21 @@ server <- function(input, output) {
       easyClose = TRUE
     ))
   })
-
-
+  
+  
   output$table_discount <- renderTable(df)
-
+  
   ## Reactivity from table
   selectdata <- reactive({
     table <- read.csv("data_catalog_games.csv")
     ##dplyr::filter(nas1, nas1$industry %in% input$picker_sector & nas1$country %in% input$picker_country)
   })
-
+  
   ## output table for games catalog
   output$mytable <- DT::renderDataTable({
     selectdata()
   }, escape=FALSE)
-
+  
   output$table <- renderUI(list_table())
   ## Reactivity from table
   selectdata <- reactive({
@@ -377,23 +377,23 @@ server <- function(input, output) {
     return(tb %>% select(c("Game", "Players", "index")))
     ## dplyr::filter(nas1, nas1$industry %in% input$picker_sector & nas1$country %in% input$picker_country)
   })
-
+  
   observeEvent(input$game, {
     if (input$game != "0") {
       g <- tb %>% filter(index == input$game)
       print(g)
-
+      
       # updateTextInput(session, 'game', value='0');
       shinyalert(g$Game, tags$div(style = "display: flex;", g$Players, shiny::HTML(paste0("<a href=\"", g$link, "\"  target=_blank rel=noopener noreferrer>Learn more</a>"))),
-        html = TRUE,
-        # type='info',
-        # callbackJS = "Shiny.setInputValue('game', '0');",
-        # callbackR = function() {updateTextInput(session, ig, value='0')}
+                 html = TRUE,
+                 # type='info',
+                 # callbackJS = "Shiny.setInputValue('game', '0');",
+                 # callbackR = function() {updateTextInput(session, ig, value='0')}
       )
       updateTextInput(session, "game", value = "0")
     }
   })
-
+  
   observeEvent(input$boxmode, {
     t <- selectbox()
     output$table <- renderUI(box_table(Map(boxCard, t$Game, t$Players, t$index, style = "")))
@@ -401,23 +401,23 @@ server <- function(input, output) {
   observeEvent(input$listmode, {
     output$table <- renderUI(list_table())
   })
-
+  
   observeEvent(input$d_button, {
     updateTabsetPanel(session, "processes", selected = "Design Process")
   })
-
+  
   observeEvent(input$r_button, {
     updateTabsetPanel(session, "processes", selected = "Research Process")
   })
-
+  
   observeEvent(input$a_button, {
     updateTabsetPanel(session, "processes", selected = "Acknowledgements")
   })
-
+  
   observeEvent(input$h_button, {
     updateNavbarPage(session, "navbar", selected = "Home")
   })
-
+  
   observeEvent(input$goButton, {
     output$matrix <- renderUI({
       HTML(
@@ -432,30 +432,30 @@ server <- function(input, output) {
         n.cgroup = c(2),
         caption = "Basic table with both column spanners (groups) and row
               groups",
-                tfoot="&dagger; A table footer commment")
-    )
+        tfoot="&dagger; A table footer commment")
+      )
     })
-
-
+    
+    
     # Text output response--> Question1
     output$mytext_1 <- renderText({
-
+      
       # preventing reactivity
       b <- isolate(input$radio_discount)
       if (b == "existYes") {
         "You decided to provide discount, therefore you collected 50% of the sales for Thanksgiving minus the cost for the discount."
       }
       else{
-      "You decided to not provide discount, therefore you collected 0% of the sales for Thanksgiving "
+        "You decided to not provide discount, therefore you collected 0% of the sales for Thanksgiving "
       }
-
-
+      
+      
     })
-
-
-
+    
+    
+    
   })
-
+  
   observeEvent(input$goButton_2, {
     if (input$pretty_1 == TRUE) {
       output$mytext_2 <- renderText({
@@ -476,31 +476,31 @@ server <- function(input, output) {
           )
         }
       })
-
+      
     }
-
+    
     else{
-  output$mytext_2  <- renderText({
-    # preventing reactivity
-    b= isolate(as.numeric(input$picker_2))
-    if (b<6){
-      paste0("You decided to provide a discount of ",df$Discount[(b*2)+1], "%.
+      output$mytext_2  <- renderText({
+        # preventing reactivity
+        b= isolate(as.numeric(input$picker_2))
+        if (b<6){
+          paste0("You decided to provide a discount of ",df$Discount[(b*2)+1], "%.
              You lost the price war and made $0 USD profit. Tropical Inc profited $", df$Profits[(6*2)+1], " USD. Try Again!")
-
+          
+        }
+        else if (b>6){
+          paste0("You won the price war! But a discount of ",df$Discount[(b*2)+1], "% led to a loss of $",
+                 df$Profits[(b*2)+1], " USD. On the flip side Tropical Inc profited $ 0 USD. Try Again!")
+        }
+      })
     }
-    else if (b>6){
-      paste0("You won the price war! But a discount of ",df$Discount[(b*2)+1], "% led to a loss of $",
-             df$Profits[(b*2)+1], " USD. On the flip side Tropical Inc profited $ 0 USD. Try Again!")
-    }
+    
+    
   })
-    }
-
-
-  })
-
-
-
-
+  
+  
+  
+  
   observeEvent(input$goButton_2, {
     output$lossMessage <- renderText("")
     output$winMessage <- renderText("")
@@ -530,7 +530,7 @@ server <- function(input, output) {
         than 60% discount will lead to profit loss causing your competitor to pick 60% discount as well. You should not provide more than 60% either
         because the profits are less than 0 for any discount more than 60%."))
       }
-
+      
     } else {
       # preventing reactivity
       b <- isolate(as.numeric(input$picker_2))
@@ -552,11 +552,11 @@ server <- function(input, output) {
         output$winMessage <- renderText(paste("You decided to provide a discount of ", as.character(df$Discount[(b * 2) + 1]), "% and you won  $", as.character(df$Profits[(b * 2) + 1] / 2),
                                               " USD in profits.Tropical Inc profited $", as.character(df$Profits[(6 * 2) + 1] / 2), " USD. Congrats! You found the optimal solution!"))
       }
-
+      
     }
   })
-
-
+  
+  
 }
 
 # Run the application
