@@ -41,7 +41,7 @@ ui <- fluidPage(
           style="float:right"/>', '<p style="color:black"></p>')),
     homePage(),
     tutorial(),
-    game(),
+    game,
     catalog(),
     process()
   )
@@ -108,18 +108,7 @@ server <- function(input, output, session) {
   )
   output$table_discount <- renderTable(df)
   
-  # Text output response--> Question1
-  output$mytext_1 <- renderText({
-    # preventing reactivity
-    b <- isolate(input$radio_discount)
-    if (b == "existYes") {
-      "You decided to provide discount, therefore you collected 50% of the sales for Thanksgiving minus the cost for the discount."
-    }
-    else{
-      "You decided to not provide discount, therefore you collected 0% of the sales for Thanksgiving "
-    }
-  })
-  
+  output$mytext_1 <- renderText("")
   
   ## output table for games catalog
   output$mytable <- DT::renderDataTable({
@@ -140,6 +129,22 @@ server <- function(input, output, session) {
       easyClose = TRUE
     ))
   })
+  observeEvent(input$goButton, {
+    # Text output response--> Question1
+    output$mytext_1 <- renderText({
+      # preventing reactivity
+      b <- isolate(input$radio_discount)
+      print(b)
+      if (b == "existYes") {
+        "You decided to provide discount, therefore you collected 50% of the sales for Thanksgiving minus the cost for the discount."
+      }
+      else{
+        "You decided to not provide discount, therefore you collected 0% of the sales for Thanksgiving "
+      }
+    })
+  }
+  
+  )
   
   
   observeEvent(input$game, {

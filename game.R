@@ -10,7 +10,8 @@ library(shinydashboard)
 library(shinyalert)
 
 
-game <- function() {
+# game <- function() {
+  game <-
   tabPanel("Game", tabsetPanel(type = "tabs",
                                tabPanel(
                                  "Level 1", br(),
@@ -69,4 +70,4 @@ game <- function() {
                                  )
                                )
   ))
-}
+# }
