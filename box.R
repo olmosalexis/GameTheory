@@ -14,7 +14,7 @@ boxCard <- function(title, content="", id="0", style="") {
                  border-top: 1px solid #000;
                  border-down: 1px solid #000;
                  padding:10px;
-                 background-color: #00FFF6",
+                 background-color: #CFFDE1",
                  style),
     id=id,
     onclick = sprintf(
