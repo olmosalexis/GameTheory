@@ -193,9 +193,9 @@ server <- function(input, output, session) {
       # updateTextInput(session, 'game', value='0');
       shinyalert(g$Game, tags$div(
         style = "display: flex; flex-direction: column;",
-        tags$div(paste("Description:", g$Description), align='left'),
-        tags$div(paste("Country of Origin:", g$Place), align='left'),
-        tags$div(paste("Year of Origin:", g$Year), align='left'),
+        tags$div(tags$b("Description:"), g$Description, align='left'),
+        tags$div(tags$b("Country of Origin:"), g$Place, align='left'),
+        tags$div(tags$b("Year of Origin:"), g$Year, align='left'),
         tags$div(
           align='left',
           shiny::HTML(paste0("<a href=\"", g$link, "\"  target=_blank rel=noopener noreferrer>Learn more</a>")))),
