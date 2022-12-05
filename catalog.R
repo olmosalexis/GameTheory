@@ -42,7 +42,7 @@ box_table <- function(d) {
 }
 
 
-catalog <- tabPanel(
+catalog <- function() {tabPanel(
   "Catalog",
   mainPanel(
     column(2,
@@ -68,14 +68,14 @@ catalog <- tabPanel(
                     )
              ),
            ),
-           ),
+    ),
     column(10,
-    uiOutput("table")
+           uiOutput("table")
     )
     # , column(2)
   )
 )
-
+}
 box <- function(name, t) {
   return(valueBox(
     value = name,
@@ -91,5 +91,5 @@ merge <- function(t, link) {
   if (is.null(link)) {
     return(paste0("<a href=\"https://www.google.com\"  target=_blank rel=noopener noreferrer>", t, "</a>"));
   }
-  return(paste0("<a href=\"", link, "\">", t, "</a>"));
+  return(paste0("<a href=\"", link, "\"target=_blank rel=noopener noreferrer>", t, "</a>"));
 }

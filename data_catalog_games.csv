@@ -1,48 +1,48 @@
-Game,Players,Strategies per player,Number of¬†pure strategy¬†Nash equilibria,Sequential,Perfect information,Constant sum¬†(e.g.¬†Zero sum),link
-Battle of the sexes,2,2,2,No,No,No,https://en.wikipedia.org/wiki/Battle_of_the_sexes_(game_theory)
-Centipede game,2,variable,1,Yes,Yes,No,https://en.wikipedia.org/wiki/Centipede_game
-Chicken¬†(aka hawk-dove),2,2,2,No,No,No,https://en.wikipedia.org/wiki/Game_of_chicken
-Coordination game,N,variable,>2,No,No,No,https://en.wikipedia.org/wiki/Coordination_game
-Cournot game,2,infinite[1],1,No,No,Yes,https://en.wikipedia.org/wiki/Cournot_game
-Deadlock,2,2,1,No,No,No,https://en.wikipedia.org/wiki/Deadlock_(game)
-Dictator game,2,infinite[1],1,N/A[2],N/A[2],Yes,https://en.wikipedia.org/wiki/Dictator_game
-Diner's dilemma,N,2,1,No,No,No,https://en.wikipedia.org/wiki/Diner%27s_dilemma
-Dollar auction,2,2,0,Yes,Yes,No,https://en.wikipedia.org/wiki/Dollar_auction
-El Farol bar,N,2,variable,No,No,No,https://en.wikipedia.org/wiki/El_Farol_bar_problem
-Guess 2/3 of the average,N,infinite,1,No,No,Yes,https://en.wikipedia.org/wiki/Guess_2/3_of_the_average
-Kuhn poker,2,12 & 4,0,Yes,No,Yes,https://en.wikipedia.org/wiki/Kuhn_poker
-Matching pennies¬†aka¬†Parity game,2,2,0,No,No,Yes,https://en.wikipedia.org/wiki/Matching_pennies
-Minority Game,N,2,variable,No,No,No,https://en.wikipedia.org/wiki/El_Farol_Bar_problem#Minority_game
-Nash bargaining game,2,infinite[1],infinite[1],No,No,Yes,https://en.wikipedia.org/wiki/Nash_bargaining_game
-Pirate game,N,infinite[1],infinite[1],Yes,Yes,Yes,https://en.wikipedia.org/wiki/Pirate_game
-Prisoner's dilemma,2,2,1,No,No,No,https://en.wikipedia.org/wiki/Prisoner%27s_dilemma
-"Rock, Paper, Scissors",2,3,0,No,No,Yes,"https://en.wikipedia.org/wiki/Rock,_paper,_scissors"
-Signaling game,N,variable,variable,Yes,No,No,https://en.wikipedia.org/wiki/Signaling_games
-Stag hunt,2,2,2,No,No,No,https://en.wikipedia.org/wiki/Stag_hunt
-Trust game,2,infinite,1,Yes,Yes,No,https://en.wikipedia.org/wiki/Trust_game
-Ultimatum game,2,infinite[1],infinite[1],Yes,Yes,,https://en.wikipedia.org/wiki/Ultimatum_game
-Blotto games,2,variable,variable,No,No,Yes,https://en.wikipedia.org/wiki/Blotto_games
-Cake cutting,"N, usually 2",infinite,variable[1],Yes,Yes,Yes,https://en.wikipedia.org/wiki/Fair_cake-cutting
-Cournot game,2,infinite[2],1,No,No,No,https://en.wikipedia.org/wiki/Cournot_game
-Dictator game,2,infinite[2],1,N/A[3],N/A[3],Yes,https://en.wikipedia.org/wiki/Dictator_game
-Game without a value,2,infinite,0,No,No,Yes,https://en.wikipedia.org/wiki/Example_of_a_game_without_a_value
-Gift-exchange game,"N, usually 2",variable,1,Yes,Yes,No,https://en.wikipedia.org/wiki/Gift-exchange_Game
-Guess 2/3 of the average,N,infinite,1,No,No,Maybe[4],https://en.wikipedia.org/wiki/Guess_2/3_of_the_average
-Kuhn poker,2,27 & 64,0,Yes,No,Yes,https://en.wikipedia.org/wiki/Kuhn_poker
-Matching pennies,2,2,0,No,No,Yes,https://en.wikipedia.org/wiki/Matching_pennies
-Minimum Effort Game aka Weak-Link Game,Infinite,7,7,No,No,No,https://en.wikipedia.org/w/index.php?title=Minimum_Effort_Game_aka_Weak-Link_Game&action=edit&redlink=1
-Muddy Children Puzzle,N,2,1,Yes,No,No,https://en.wikipedia.org/wiki/Induction_puzzles#Muddy_Children_Puzzle
-Nash bargaining game,2,infinite[2],infinite[2],No,No,No,https://en.wikipedia.org/wiki/Nash_bargaining_game
-Optional prisoner's dilemma,2,3,1,No,No,No,https://en.wikipedia.org/wiki/Optional_prisoner%27s_dilemma
-Peace war game,N,variable,>2,Yes,No,No,https://en.wikipedia.org/wiki/Peace_war_game
-Pirate game,N,infinite[2],infinite[2],Yes,Yes,No,https://en.wikipedia.org/wiki/Pirate_game
-Platonia dilemma,N,2,2N‚àí1,No,Yes,No,https://en.wikipedia.org/wiki/Platonia_dilemma
-Princess and monster game,2,infinite,0,No,No,Yes,https://en.wikipedia.org/wiki/Princess_and_monster_game
-Public goods,N,infinite,1,No,No,No,https://en.wikipedia.org/wiki/Public_goods_game
-Screening game,2,variable,variable,Yes,No,No,https://en.wikipedia.org/wiki/Screening_game
-Traveler's dilemma,2,N >> 1,1,No,No,No,https://en.wikipedia.org/wiki/Traveler%27s_dilemma
-Truel,3,3-1月,infinite,Yes,Yes,No,https://en.wikipedia.org/wiki/Truel
-Ultimatum game,2,infinite[2],infinite[2],Yes,Yes,No,https://en.wikipedia.org/wiki/Ultimatum_game
-Vickrey auction,N,infinite,1,No,No,No,https://en.wikipedia.org/wiki/Vickrey_auction
-Volunteer's dilemma,N,2,2,No,No,No,https://en.wikipedia.org/wiki/Volunteer%27s_dilemma
-War of attrition,2,2,0,No,No,No,https://en.wikipedia.org/wiki/War_of_attrition_(game)
+Game,Players,Strategies per player,Number of¬†pure strategy¬†Nash equilibria,Sequential,Perfect information,Constant sum¬†(e.g.¬†Zero sum),link,Year,Place,Description
+Battle of the sexes,2,2,2,No,No,No,https://en.wikipedia.org/wiki/Battle_of_the_sexes_(game_theory),2022,Earth,This game is originated on Earth
+Centipede game,2,variable,1,Yes,Yes,No,https://en.wikipedia.org/wiki/Centipede_game,2022,Earth,This game is originated on Earth
+Chicken¬†(aka hawk-dove),2,2,2,No,No,No,https://en.wikipedia.org/wiki/Game_of_chicken,2022,Earth,This game is originated on Earth
+Coordination game,N,variable,>2,No,No,No,https://en.wikipedia.org/wiki/Coordination_game,2022,Earth,This game is originated on Earth
+Cournot game,2,infinite[1],1,No,No,Yes,https://en.wikipedia.org/wiki/Cournot_game,2022,Earth,This game is originated on Earth
+Deadlock,2,2,1,No,No,No,https://en.wikipedia.org/wiki/Deadlock_(game),2022,Earth,This game is originated on Earth
+Dictator game,2,infinite[1],1,N/A[2],N/A[2],Yes,https://en.wikipedia.org/wiki/Dictator_game,2022,Earth,This game is originated on Earth
+Diner's dilemma,N,2,1,No,No,No,https://en.wikipedia.org/wiki/Diner%27s_dilemma,2022,Earth,This game is originated on Earth
+Dollar auction,2,2,0,Yes,Yes,No,https://en.wikipedia.org/wiki/Dollar_auction,2022,Earth,This game is originated on Earth
+El Farol bar,N,2,variable,No,No,No,https://en.wikipedia.org/wiki/El_Farol_bar_problem,2022,Earth,This game is originated on Earth
+Guess 2/3 of the average,N,infinite,1,No,No,Yes,https://en.wikipedia.org/wiki/Guess_2/3_of_the_average,2022,Earth,This game is originated on Earth
+Kuhn poker,2,12 & 4,0,Yes,No,Yes,https://en.wikipedia.org/wiki/Kuhn_poker,2022,Earth,This game is originated on Earth
+Matching pennies¬†aka¬†Parity game,2,2,0,No,No,Yes,https://en.wikipedia.org/wiki/Matching_pennies,2022,Earth,This game is originated on Earth
+Minority Game,N,2,variable,No,No,No,https://en.wikipedia.org/wiki/El_Farol_Bar_problem#Minority_game,2022,Earth,This game is originated on Earth
+Nash bargaining game,2,infinite[1],infinite[1],No,No,Yes,https://en.wikipedia.org/wiki/Nash_bargaining_game,2022,Earth,This game is originated on Earth
+Pirate game,N,infinite[1],infinite[1],Yes,Yes,Yes,https://en.wikipedia.org/wiki/Pirate_game,2022,Earth,This game is originated on Earth
+Prisoner's dilemma,2,2,1,No,No,No,https://en.wikipedia.org/wiki/Prisoner%27s_dilemma,2022,Earth,This game is originated on Earth
+"Rock, Paper, Scissors",2,3,0,No,No,Yes,"https://en.wikipedia.org/wiki/Rock,_paper,_scissors",2022,Earth,This game is originated on Earth
+Signaling game,N,variable,variable,Yes,No,No,https://en.wikipedia.org/wiki/Signaling_games,2022,Earth,This game is originated on Earth
+Stag hunt,2,2,2,No,No,No,https://en.wikipedia.org/wiki/Stag_hunt,2022,Earth,This game is originated on Earth
+Trust game,2,infinite,1,Yes,Yes,No,https://en.wikipedia.org/wiki/Trust_game,2022,Earth,This game is originated on Earth
+Ultimatum game,2,infinite[1],infinite[1],Yes,Yes,,https://en.wikipedia.org/wiki/Ultimatum_game,2022,Earth,This game is originated on Earth
+Blotto games,2,variable,variable,No,No,Yes,https://en.wikipedia.org/wiki/Blotto_games,2022,Earth,This game is originated on Earth
+Cake cutting,"N, usually 2",infinite,variable[1],Yes,Yes,Yes,https://en.wikipedia.org/wiki/Fair_cake-cutting,2022,Earth,This game is originated on Earth
+Cournot game,2,infinite[2],1,No,No,No,https://en.wikipedia.org/wiki/Cournot_game,2022,Earth,This game is originated on Earth
+Dictator game,2,infinite[2],1,N/A[3],N/A[3],Yes,https://en.wikipedia.org/wiki/Dictator_game,2022,Earth,This game is originated on Earth
+Game without a value,2,infinite,0,No,No,Yes,https://en.wikipedia.org/wiki/Example_of_a_game_without_a_value,2022,Earth,This game is originated on Earth
+Gift-exchange game,"N, usually 2",variable,1,Yes,Yes,No,https://en.wikipedia.org/wiki/Gift-exchange_Game,2022,Earth,This game is originated on Earth
+Guess 2/3 of the average,N,infinite,1,No,No,Maybe[4],https://en.wikipedia.org/wiki/Guess_2/3_of_the_average,2022,Earth,This game is originated on Earth
+Kuhn poker,2,27 & 64,0,Yes,No,Yes,https://en.wikipedia.org/wiki/Kuhn_poker,2022,Earth,This game is originated on Earth
+Matching pennies,2,2,0,No,No,Yes,https://en.wikipedia.org/wiki/Matching_pennies,2022,Earth,This game is originated on Earth
+Minimum Effort Game aka Weak-Link Game,Infinite,7,7,No,No,No,https://en.wikipedia.org/w/index.php?title=Minimum_Effort_Game_aka_Weak-Link_Game&action=edit&redlink=1,2022,Earth,This game is originated on Earth
+Muddy Children Puzzle,N,2,1,Yes,No,No,https://en.wikipedia.org/wiki/Induction_puzzles#Muddy_Children_Puzzle,2022,Earth,This game is originated on Earth
+Nash bargaining game,2,infinite[2],infinite[2],No,No,No,https://en.wikipedia.org/wiki/Nash_bargaining_game,2022,Earth,This game is originated on Earth
+Optional prisoner's dilemma,2,3,1,No,No,No,https://en.wikipedia.org/wiki/Optional_prisoner%27s_dilemma,2022,Earth,This game is originated on Earth
+Peace war game,N,variable,>2,Yes,No,No,https://en.wikipedia.org/wiki/Peace_war_game,2022,Earth,This game is originated on Earth
+Pirate game,N,infinite[2],infinite[2],Yes,Yes,No,https://en.wikipedia.org/wiki/Pirate_game,2022,Earth,This game is originated on Earth
+Platonia dilemma,N,2,2N‚àí1,No,Yes,No,https://en.wikipedia.org/wiki/Platonia_dilemma,2022,Earth,This game is originated on Earth
+Princess and monster game,2,infinite,0,No,No,Yes,https://en.wikipedia.org/wiki/Princess_and_monster_game,2022,Earth,This game is originated on Earth
+Public goods,N,infinite,1,No,No,No,https://en.wikipedia.org/wiki/Public_goods_game,2022,Earth,This game is originated on Earth
+Screening game,2,variable,variable,Yes,No,No,https://en.wikipedia.org/wiki/Screening_game,2022,Earth,This game is originated on Earth
+Traveler's dilemma,2,N >> 1,1,No,No,No,https://en.wikipedia.org/wiki/Traveler%27s_dilemma,2022,Earth,This game is originated on Earth
+Truel,3,3-1月,infinite,Yes,Yes,No,https://en.wikipedia.org/wiki/Truel,2022,Earth,This game is originated on Earth
+Ultimatum game,2,infinite[2],infinite[2],Yes,Yes,No,https://en.wikipedia.org/wiki/Ultimatum_game,2022,Earth,This game is originated on Earth
+Vickrey auction,N,infinite,1,No,No,No,https://en.wikipedia.org/wiki/Vickrey_auction,2022,Earth,This game is originated on Earth
+Volunteer's dilemma,N,2,2,No,No,No,https://en.wikipedia.org/wiki/Volunteer%27s_dilemma,2022,Earth,This game is originated on Earth
+War of attrition,2,2,0,No,No,No,https://en.wikipedia.org/wiki/War_of_attrition_(game),2022,Earth,This game is originated on Earth
