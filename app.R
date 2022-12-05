@@ -108,7 +108,7 @@ server <- function(input, output, session) {
     return(tb %>% select(c("Game", "Players", "index")))
     ## dplyr::filter(nas1, nas1$industry %in% input$picker_sector & nas1$country %in% input$picker_country)
   })
-
+  
   ###########################################################################
   #################################VALUES####################################
   ###########################################################################
@@ -179,6 +179,95 @@ server <- function(input, output, session) {
       else{
         "You decided to not provide discount, therefore you collected 0% of the sales for Thanksgiving "
       }
+    })
+  }
+  )
+  
+  observeEvent(input$show_more_button, {
+    output$mytext_6 <- renderUI({
+      tags$div(tags$hr(),
+               fluidRow(
+                 column(1),
+                 column(
+                   10,
+                   shiny::HTML("<center><h2>1. Time: How long does it take a user to accomplish a
+                  given set of tasks using the system?</h2></center><br>"),
+                   shiny::HTML("<center><h4>It takes about 5-10 minutes for a user to go through the
+                  entire application and viewing the statistics of all the
+                  colleges using the graphs</center></h4>")
+                 ),
+                 column(1)
+               ),
+               tags$hr(),
+               fluidRow(
+                 column(
+                   12,
+                   shiny::HTML("<center> <h2>2. Errors: How many errors does a user make and how
+                  serious are they?</h2> </center><br>"),
+                   shiny::HTML("<center><h4>Users generally do not make errors since it is a pretty
+                  straightforward application</center></h4>")
+                 )
+               ),
+               tags$hr(),
+               fluidRow(
+                 column(
+                   12,
+                   shiny::HTML("<center> <h2>3. Learning: How long does it take a novice user to
+                  learn how to use the system to do a given set of tasks?</h2> </center><br>"),
+                   shiny::HTML("<center><h4>It should not take more than 10 minutes for a novice user
+                  to learn how to use the application</center></h4>")
+                 )
+               ),
+               tags$hr(),
+               fluidRow(
+                 column(
+                   12,
+                   shiny::HTML("<center> <h2>4. Functionality: What range of tasks can a user do
+                  in practice with the system?</h2> </center><br>"),
+                   shiny::HTML("<center><h4> Users can play and learn throughout the 3 levels about the thinking related to decision making. </center></h4>")
+                 )
+               ),
+               tags$hr(),
+               fluidRow(
+                 column(
+                   12,
+                   shiny::HTML("<center> <h2>5. Recall: How easy is it for a user to recall how to use
+                   the system on a task that he has not done for some time?</h2> </center><br>"),
+                   shiny::HTML("<center><h4> Should be quite straightforward for a user that has any experience with internet.</center></h4>")
+                 )
+               ),
+               tags$hr(),
+               fluidRow(
+                 column(
+                   12,
+                   shiny::HTML("<center> <h2>6. Concentration: How many things does a user have to
+                  keep in mind while using the system?</h2> </center><br>"),
+                   shiny::HTML("<center><h4>The only aspect that requires concentration is during some of the games. The users might have to
+                                                           keep track of their learnings at each previous level so that they can make better decisions for the next round.</center></h4>")
+                 )
+               ),
+               tags$hr(),
+               fluidRow(
+                 column(
+                   12,
+                   shiny::HTML("<center> <h2>7. Fatigue: How tired do users get when they use the
+                  system for extended periods?</h2> </center><br>"),
+                   shiny::HTML("<center><h4>Users might get tired since the game requires some thinking, which might be
+                                                           exhausting for users that do not have a good foundation in math or economics</center></h4>")
+                 )
+               ),
+               tags$hr(),
+               fluidRow(
+                 column(
+                   12,
+                   shiny::HTML("<center> <h2>8. Acceptability: How do users subjectively evaluate
+                  the system?</h2> </center><br>"),
+                   shiny::HTML("<center><h4>The user can evaluate the system on the basis of the use
+                  of the information received, in this case it would be about
+                  game thoery</center></h4><br><br><br><br>"),
+                   tags$footer(align = "center", shiny::HTML("Copyright © 2022-2023 Game Theory Group CSC-324 Fall  : Made with <3 in Grinnell, Iowa"), style = "position:absolute;bottom:0;width:95%;height:50px; /* Height of the footer */color: black;padding: 0px;background-color: white;z-index: 1000;")
+                 )
+               ))
     })
   }
   

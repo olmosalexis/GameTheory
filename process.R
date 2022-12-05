@@ -19,23 +19,41 @@ process <- function() {
       tabPanel(
         "Process & Acknowledgement",
         br(),
-        actionButton("d_button", HTML('<img src="design.png",  height = "150px", width = "300px", style="float:right"/>', '<p style="color:black"></p>')),
-        shiny::HTML(" "),
-        actionButton("r_button", HTML('<img src="research.png",  height = "150px", width = "300px", style="float:right"/>', '<p style="color:black"></p>')),
-        shiny::HTML(" "),
-        actionButton("a_button", HTML('<img src="acknowledgement.png",  height = "150px", width = "300px", style="float:right"/>', '<p style="color:black"></p>')),
+        fluidRow(column(4, align="center", actionButton("d_button", HTML('<img src="design.png",  height = "150px", width = "300px" style="padding: 0;
+border: none;
+background: none;">'), style="color: #fff; background-color: #fff; border-color: #fff")),
+                 
+                 column(8, shiny::HTML("<center> <h3>The design process of our application refers to the series of steps or stages that we followed in order to create a successful and user-friendly application. <br><br>Press the icon to read more about it<br><br>
+                    This process typically included steps such as identifying the problem, gathering and analyzing user requirements, creating wireframes and prototypes, testing and refining the design, and finally developing and launching the application.</h2> </center>"))),
+        
+        
+        tags$hr(),
+        fluidRow(column(4, align="center", actionButton("r_button", HTML('<img src="research.png",  height = "150px", width = "300px" style="padding: 0;
+border: none;
+background: none;">'), style="color: #fff; background-color: #fff; border-color: #fff")),
+                 
+                 column(8, shiny::HTML("<center> <h3>The research process of our application refers to the series of steps or stages that are followed in order to gather and analyze information that will be used to inform the design and development of the application. <br><br>Press the icon to read more about it<br><br>
+        This process includes activities such as methodology, conducting user interviews and surveys to gather feedback and insights, and analyzing data to identify trends and patterns that can inform the design of the application.</h2> </center>"))),
+        
+        tags$hr(),
+        fluidRow(align="center", column(4, align="center", actionButton("a_button", HTML('<img src="acknowledgement.png",  height = "150px", width = "300px" style="padding: 0;
+border: none;
+background: none;">'), style="color: #fff; background-color: #fff; border-color: #fff")),
+                 
+                 column(8, shiny::HTML("<center> <h3>The acknowledgements section of our application is a brief section in which we are giving thanks to individuals who have contributed to the success of our application. <br><br>Press the icon to read more about it<br><br>
+        This section includes thanks to individuals who provided valuable feedback or support during the development process, and others who played a significant role in the creation of our application.</h2> </center>"))),
+        
       ),
       tabPanel(
         "Design Process",
         id = "Design Process",
         fluidRow(
-          shiny::HTML("<center> <h1>DESIGN PROCESS<h1> </center>"),
-          div(img(src = "design.png", height = "100px"), style = "text-align: center;"),
+          div(img(src = "design.png", height = "200px"), style = "text-align: center;"),
           tags$hr(),
           column(1),
           column(
             10,
-            shiny::HTML("<br><center><h2>Usage of wireframe and screen mockup</h2></center><br>"),
+            shiny::HTML("<center><h2>Usage of wireframe and screen mockup</h2></center><br>"),
             shiny::HTML("<h4><ul><li>At first, we were still determining how we wished to present
                   our data but making a wireframe and screen mockup helped us
                   visualize what we wanted to do and then perform the
@@ -52,103 +70,156 @@ process <- function() {
                   button on the home page which would take the user directly to the game.
                   The user sees the home page as the first page when they open the app.
                   <br><br><li> We also made it so that when the user clicks the back button on the browser,
-                  they are taken to the home page.</h4>")
+                  they are taken to the home page.</h4><br><br>")
           ),
           column(1)
         ),
-        tags$hr(),
         fluidRow(
-          column(1),
-          column(
-            10,
-            shiny::HTML("<br><center><h2>1. Time: How long does it take a user to accomplish a
-                  given set of tasks using the system?</h2></center><br>"),
-            shiny::HTML("<center><h4>It takes about 5-10 minutes for a user to go through the
-                  entire application and viewing the statistics of all the
-                  colleges using the graphs</center></h4>")
-          ),
-          column(1)
+          column(12, align="center",
+                 actionButton("show_more_button", p(h5("Learn More"))
+                 ))),
+        fluidRow(
+          column(12, align="center",
+                 br())
         ),
-        tags$hr(),
-        fluidRow(
-          column(
-            12,
-            shiny::HTML("<br><center> <h2>2. Errors: How many errors does a user make and how
-                  serious are they?</h2> </center><br>"),
-            shiny::HTML("<center><h4>Users generally do not make errors since it is a pretty
-                  straightforward application</center></h4>")
-          )
-        ),
-        tags$hr(),
-        fluidRow(
-          column(
-            12,
-            shiny::HTML("<br><center> <h2>3. Learning: How long does it take a novice user to
-                  learn how to use the system to do a given set of tasks?</h2> </center><br>"),
-            shiny::HTML("<center><h4>It should not take more than 10 minutes for a novice user
-                  to learn how to use the application</center></h4>")
-          )
-        ),
-        tags$hr(),
-        fluidRow(
-          column(
-            12,
-            shiny::HTML("<br><center> <h2>4. Functionality: What range of tasks can a user do
-                  in practice with the system?</h2> </center><br>"),
-            shiny::HTML("<center><h4> Users can play and learn throughout the 3 levels about the thinking related to decision making. </center></h4>")
-          )
-        ),
-        tags$hr(),
-        fluidRow(
-          column(
-            12,
-            shiny::HTML("<br><center> <h2>5. Recall: How easy is it for a user to recall how to use
-                   the system on a task that he has not done for some time?</h2> </center><br>"),
-            shiny::HTML("<center><h4> Should be quite straightforward for a user that has any experience with internet.</center></h4>")
-          )
-        ),
-        tags$hr(),
-        fluidRow(
-          column(
-            12,
-            shiny::HTML("<br><center> <h2>6. Concentration: How many things does a user have to
-                  keep in mind while using the system?</h2> </center><br>"),
-            shiny::HTML("<center><h4>The only aspect that requires concentration is during some of the games. The users might have to
-                                                           keep track of their learnings at each previous level so that they can make better decisions for the next round.</center></h4>")
-          )
-        ),
-        tags$hr(),
-        fluidRow(
-          column(
-            12,
-            shiny::HTML("<br><center> <h2>7. Fatigue: How tired do users get when they use the
-                  system for extended periods?</h2> </center><br>"),
-            shiny::HTML("<center><h4>Users might get tired since the game requires some thinking, which might be
-                                                           exhausting for users that do not have a good foundation in math or economics</center></h4>")
-          )
-        ),
-        tags$hr(),
-        fluidRow(
-          column(
-            12,
-            shiny::HTML("<br><center> <h2>8. Acceptability: How do users subjectively evaluate
-                  the system?</h2> </center><br>"),
-            shiny::HTML("<center><h4>The user can evaluate the system on the basis of the use
-                  of the information received, in this case it would be about
-                  game thoery</center></h4><br><br><br><br>"),
-            tags$footer(align = "center", shiny::HTML("Copyright © 2022-2023 Game Theory Group CSC-324 Fall  : Made with <3 in Grinnell, Iowa"), style = "position:absolute;bottom:0;width:95%;height:50px; /* Height of the footer */color: black;padding: 0px;background-color: white;z-index: 1000;")
-          )
-        )
+        uiOutput('mytext_6')
       ),
       tabPanel(
         "Research Process",
         id = "Research Process",
-        shiny::HTML("<br><center><h2>Research</h2></center><br>")
+        fluidRow(
+          div(img(src = "research.png", height = "200px"), style = "text-align: center;"),
+          tags$hr(),
+          column(1),
+          column(
+            10,
+            shiny::HTML("<center><h2>Title: Game Theory</h2></center><br>"),
+          ),
+          column(1)
+        ),
+        tags$hr(),
+        fluidRow(
+          column(
+            6,
+            shiny::HTML("<center> <h2>Members</h2> </center><br>"),
+            shiny::HTML("<center><h4>Alper, Anil | Chandgothia, Deepit | Lu, Hanfeng (Paul) <br><br> Olmos, Alexis (Alex) | Ono Sant'anna, Vinicius | Thompson, Madeline (Maddy)</center></h4>")
+          ),
+          column(
+            6,
+            shiny::HTML("<center> <h2>ROLES</h2> </center><br>"),
+            shiny::HTML("<center><h4>Scrum Master: Thompson, Madeline (Maddy)<br><br>
+Product Owner: Olmos, Alexis (Alex)<br><br>
+Designers: Chandgothia, Deepit | Lu, Hanfeng (Paul)<br><br>
+Developers: Alper, Anil | Chandgothia, Deepit | Ono Sant'anna, Vinicius
+</center></h4>")
+          )
+        ),
+        tags$hr(),
+        fluidRow(
+          column(
+            12,
+            shiny::HTML("<center> <h2>Methodology</h2> </center><br>"),
+            shiny::HTML("<center><h4>We used R Shiny along with GitHub for software development and version control using Git. <br><br>
+            Our team came up with the 2 levels of games in our app with the help of Professor Abhinaba Nandy (Instructor in Economics, Grinnell College). <br><br>
+            Each person on the development team was responsible for a tab which they ownership over. 
+            They would pull the most recent version of the application from the master branch and work in their own separate branch. <br><br>
+            In this way once they were done implementing a new feature, they could easily create a pull request where other members of the development team could review their changes, 
+            and eventually merge their code to the master branch if everything was working as expected.
+</center></h4>")
+          )
+        ),
+        tags$hr(),
+        fluidRow(
+          column(
+            12,
+            shiny::HTML("<center> <h2>Identify the problem</h2> </center><br>"),
+            shiny::HTML("<center><h4>The first step in the research process was to identify the problem that we wanted to solve with the game app. <br><br>
+            We decided to use game theory as a framework for the game because it is a simple yet interesting concept that is applicable in many real-life situations.
+</center></h4>")
+          )
+        ),
+        tags$hr(),
+        fluidRow(
+          column(
+            12,
+            shiny::HTML("<center> <h2>Develop a research question</h2> </center><br>"),
+            shiny::HTML("<center><h4>After identifying the problem, we developed a research question that would guide our design process.<br><br> 
+            Our research question was: How can we create a game app that uses game theory to help users understand this concept and make it interesting and educational?
+</center></h4>")
+          )
+        ),
+        tags$hr(),
+        fluidRow(
+          column(
+            12,
+            shiny::HTML("<center> <h2>Conduct literature review</h2> </center><br>"),
+            shiny::HTML("<center><h4>We conducted a literature review to gather information about game theory and its applications in different fields, as well as to understand how other game apps have been designed and how they have been received by users.
+</center></h4>")
+          )
+        ),
+        tags$hr(),
+        fluidRow(
+          column(
+            12,
+            shiny::HTML("<center> <h2>Design the game app</h2> </center><br>"),
+            shiny::HTML("<center><h4>Based on the information gathered from the literature review, we designed the game app using wireframes and screen mockups. <br><br>
+            The design included a home page that would provide an overview of the game, a game page where the user could play the game, and a catalog page where the user could see the results of the game.
+</center></h4>")
+          )
+        ),
+        tags$hr(),
+        fluidRow(
+          column(
+            12,
+            shiny::HTML("<center> <h2>Test the game app</h2> </center><br>"),
+            shiny::HTML("<center><h4>The first step in the research process was to identify the problem that we wanted to solve with the game app. <br><br>
+            We decided to use game theory as a framework for the game because it is a simple yet interesting concept that is applicable in many real-life situations.
+</center></h4>")
+          )
+        ),
+        tags$hr(),
+        fluidRow(
+          column(
+            12,
+            shiny::HTML("<center> <h2>Analyze and interpret the results</h2> </center><br>"),
+            shiny::HTML("<center><h4>We analyzed the data collected from the testing of the game app to understand its effectiveness in achieving our research question. <br><br>
+            We interpreted the results to determine the strengths and weaknesses of the app and made recommendations for improvement.
+</center></h4>")
+          )
+        ),
+        tags$hr(),
+        fluidRow(
+          column(
+            12,
+            shiny::HTML("<center> <h2>Write the research report</h2> </center><br>"),
+            shiny::HTML("<center><h4>Finally, we wrote a research report summarizing the process, findings, and recommendations of our research.<br><br><br><br>
+</center></h4>")
+          )
+        )
       ),
       tabPanel(
         "Acknowledgements",
         id = "Acknowledgements",
-        shiny::HTML("<br><center><h2>Acknowledge</h2></center><br>")
+        fluidRow(
+          div(img(src = "acknowledgement.png", height = "200px"), style = "text-align: center;"),
+          tags$hr(),
+          column(1),
+          column(
+            10,
+            shiny::HTML("<center><h2>Letter of Acknowledgement</h2></center><br>"),
+            shiny::HTML("<h4>We would like to express our profound gratitude to Professor Eliott, of the Computer Science Department at Grinnell College for giving us this great opportunity and for their contributions to the completion of our project titled Game Theory.<br><br>
+We would also like to express our sincere thank you to Professor Abhinaba Nandy (Instructor in Economics, Grinnell College) for their help in the brainstorming stage of this application and for thieir constant input which helped us as we developed this application.<br><br>
+Our special thanks to our mentor JaeChul Jung and the students of TUT-100-13 Machines, Space, & Topology for their time and efforts they provided throughout the semester. Their useful advice and suggestions were really helpful to us during the project’s completion. In this aspect, we are eternally grateful to all of them.<br>
+<br>
+To conclude we would like to acknowledge that this project was completed entirely by us and not by anyone else.<br>
+<br>
+Sincerely<br>
+Game Theory Group (CSC-324 Fall 2022)<br>
+</h4>")
+          ),
+          column(1)
+        )
+        
       )
     )
   )
