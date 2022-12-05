@@ -12,7 +12,7 @@ library(shinyalert)
 
 # game <- function() {
   game <-
-  tabPanel("Game", tabsetPanel(id = "tab1",
+  tabPanel("Game", tabsetPanel(id="tab1",
                                tabPanel(
                                  "Level 1", br(),
                                  sidebarLayout(
@@ -36,6 +36,5 @@ library(shinyalert)
                                  ), br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),
                                  tags$footer(align = "center", shiny::HTML("<p>Copyright © 2022-2023 Game Theory Group CSC-324 Fall  : Made with <3 in Grinnell, Iowa</p>"))
                                )
-                              
   ))
 # }

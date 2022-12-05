@@ -7,9 +7,6 @@
 #    http://shiny.rstudio.com/
 #
 
-# install.packages("formattable")
-#install.packages("dplyr")
-
 library(xtable)
 library(shiny)
 library(shinyWidgets)
@@ -57,11 +54,9 @@ ui <- fluidPage(
 # Define server logic
 server <- function(input, output, session) {
   
-  
-  
   observeEvent(input$goButton, {
-      if(input$goButton==1){
-      appendTab(inputId = "tab1", tabPanel(value = "tab2",
+    if(input$goButton==1){
+      appendTab(inputId = "tab1", tabPanel(id = "tab2",
                                            "Level 2", br(),
                                            sidebarLayout(
                                              mainPanel(
@@ -94,8 +89,6 @@ server <- function(input, output, session) {
                                              ),
                                            )
       ))}})
-    
-
   
   
   ###########################################################################
@@ -240,8 +233,9 @@ server <- function(input, output, session) {
         n.rgroup = c(2),
         cgroup = "Tropical Inc.",
         n.cgroup = c(2),
-        caption = "Payoff Matrix of all possible decisions",
-        tfoot="TR= Total revenue, c= Discount cost")
+        caption = "Basic table with both column spanners (groups) and row
+              groups",
+        tfoot="&dagger; A table footer commment")
       )
     })
   })
