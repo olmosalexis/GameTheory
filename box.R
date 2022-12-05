@@ -25,7 +25,7 @@ boxCard <- function(title, content="", id="0", style="") {
       title
     ),
     tags$div(
-      content
+      paste("# of players:",content)
     )
   )
 }

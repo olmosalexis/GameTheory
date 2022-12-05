@@ -101,7 +101,7 @@ server <- function(input, output, session) {
   }
   
   selectdata <- reactive({
-    return(tb %>% select(c("name", "Players")))
+    return(tb %>% select(c("name", "Place", "Year", "Description")))
     ## dplyr::filter(nas1, nas1$industry %in% input$picker_sector & nas1$country %in% input$picker_country)
   })
   selectbox <- reactive({
@@ -191,10 +191,16 @@ server <- function(input, output, session) {
       print(g)
       
       # updateTextInput(session, 'game', value='0');
-      shinyalert(g$Game, tags$div(style = "display: flex;", g$Players, shiny::HTML(paste0("<a href=\"", g$link, "\"  target=_blank rel=noopener noreferrer>Learn more</a>"))),
-                 html = TRUE
+      shinyalert(g$Game, tags$div(
+        style = "display: flex; flex-direction: column;",
+        tags$div(paste("Description:", g$Description), align='left'),
+        tags$div(paste("Country of Origin:", g$Place), align='left'),
+        tags$div(paste("Year of Origin:", g$Year), align='left'),
+        tags$div(
+          align='left',
+          shiny::HTML(paste0("<a href=\"", g$link, "\"  target=_blank rel=noopener noreferrer>Learn more</a>")))),
+        html = TRUE,
       )
-      updateTextInput(session, "game", value = "0")
     }
   })
   
