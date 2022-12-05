@@ -1,3 +1,4 @@
+
 #
 # This is a Shiny web application. You can run the application by clicking
 # the 'Run App' button above.
@@ -54,6 +55,43 @@ ui <- fluidPage(
 # Define server logic
 server <- function(input, output, session) {
   
+  observeEvent(input$goButton, {
+    if(input$goButton==1){
+      appendTab(inputId = "tab1", tabPanel(id = "tab2",
+                                           "Level 2", br(),
+                                           sidebarLayout(
+                                             mainPanel(
+                                               shiny::HTML("<p><h4>Let's make it more interesting! Could you select the discount amount to
+                                                                     compete against Tropical Inc.? Take as a reference the table provided below and make a decision! Level 2 has two variations:
+                                                                       Sequential or simultaneous game. Sequential means Tropical Inc. has complete information about your decision. Simultaneous means Tropical Inc will decide without knowing your move!
+                                                                       </h4></p><br>"),
+                                               plotOutput("plot_discount"), tags$hr(), span(textOutput("lossMessage"), style="color:red"),
+                                               span(textOutput("winMessage"), style="color:green"), span(textOutput("hintMessage"), style="color:blue"),
+                                               br(),br(),br(),br(),br(),
+                                               tags$footer(align = "center", shiny::HTML("<p>Copyright © 2022-2023 Game Theory Group CSC-324 Fall  : Made with <3 in Grinnell, Iowa</p>"))),
+                                             
+                                             sidebarPanel(
+                                               verticalLayout(
+                                                 prettyCheckbox(
+                                                   inputId = "pretty_1", label = "Sequential Game?", icon = icon("check")
+                                                 ),
+                                                 pickerInput(
+                                                   inputId = "picker_2",
+                                                   label = h4("Strategy selection:"),
+                                                   choices = c("No Discount" = 0, "10%" = 1, "20%" = 2, "30%" = 3, "40%" = 4, "50%" = 5, "60%" = 6, "70%" = 7, "80%" = 8, "90%" = 9, "100%" = 10),
+                                                   options = list(
+                                                     `live-search` = TRUE
+                                                   )
+                                                 ), splitLayout(
+                                                   actionButton("goButton_2", "Implement Changes", class = "btn-success"),
+                                                   actionButton("go", HTML('<img src="data_pic.png", height="30px"style="float:right"/>', '<p style="color:black"></p>'))
+                                                 )
+                                               )
+                                             ),
+                                           )
+      ))}})
+  
+  
   ###########################################################################
   #################################SET UP####################################
   ###########################################################################
@@ -63,10 +101,9 @@ server <- function(input, output, session) {
   }
   
   selectdata <- reactive({
-    return(tb %>% select(c("name", "Place", "Year", "Description")))
+    return(tb %>% select(c("name", "Players")))
     ## dplyr::filter(nas1, nas1$industry %in% input$picker_sector & nas1$country %in% input$picker_country)
   })
-  
   selectbox <- reactive({
     return(tb %>% select(c("Game", "Players", "index")))
     ## dplyr::filter(nas1, nas1$industry %in% input$picker_sector & nas1$country %in% input$picker_country)
@@ -154,16 +191,10 @@ server <- function(input, output, session) {
       print(g)
       
       # updateTextInput(session, 'game', value='0');
-      shinyalert(g$Game, tags$div(
-        style = "display: flex; flex-direction: column;",
-        tags$div(paste("Description:", g$Description), align='left'),
-        tags$div(paste("Country of Origin:", g$Place), align='left'),
-        tags$div(paste("Year of Origin:", g$Year), align='left'),
-        tags$div(
-          align='left',
-          shiny::HTML(paste0("<a href=\"", g$link, "\"  target=_blank rel=noopener noreferrer>Learn more</a>")))),
-        html = TRUE,
+      shinyalert(g$Game, tags$div(style = "display: flex;", g$Players, shiny::HTML(paste0("<a href=\"", g$link, "\"  target=_blank rel=noopener noreferrer>Learn more</a>"))),
+                 html = TRUE
       )
+      updateTextInput(session, "game", value = "0")
     }
   })
   
