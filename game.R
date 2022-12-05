@@ -33,7 +33,7 @@ library(shinyalert)
                                        status = "primary"
                                      ), actionButton("goButton", "Implement Changes", class = "btn-success")
                                    )
-                                 ), br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),br(),
+                                 ), br(),br(),
                                  tags$footer(align = "center", shiny::HTML("<p>Copyright © 2022-2023 Game Theory Group CSC-324 Fall  : Made with <3 in Grinnell, Iowa</p>"))
                                )
   ))

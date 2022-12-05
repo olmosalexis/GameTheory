@@ -184,16 +184,7 @@ Developers: Alper, Anil | Chandgothia, Deepit | Ono Sant'anna, Vinicius
             shiny::HTML("<center> <h2>Analyze and interpret the results</h2> </center><br>"),
             shiny::HTML("<center><h4>We analyzed the data collected from the testing of the game app to understand its effectiveness in achieving our research question. <br><br>
             We interpreted the results to determine the strengths and weaknesses of the app and made recommendations for improvement.
-</center></h4>")
-          )
-        ),
-        tags$hr(),
-        fluidRow(
-          column(
-            12,
-            shiny::HTML("<center> <h2>Write the research report</h2> </center><br>"),
-            shiny::HTML("<center><h4>Finally, we wrote a research report summarizing the process, findings, and recommendations of our research.<br><br><br><br>
-</center></h4>")
+</center></h4><br></br>")
           )
         )
       ),

@@ -329,9 +329,8 @@ server <- function(input, output, session) {
         n.rgroup = c(2),
         cgroup = "Tropical Inc.",
         n.cgroup = c(2),
-        caption = "Basic table with both column spanners (groups) and row
-              groups",
-        tfoot="&dagger; A table footer commment")
+        caption = "Payoff Matrix of all possible decisions",
+        tfoot="TR= Total revenue, c= Discount cost")
       )
     })
   })
