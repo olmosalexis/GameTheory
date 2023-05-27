@@ -1,6 +1,7 @@
 # Game Theory Shiny Web Application
 
 Welcome to the Game Theory Shiny Web Application! This application is built using R and various libraries to simulate game theory scenarios. It provides an interactive gameplay experience and offers educational content related to decision-making and strategy.
+<img width="1417" alt="image" src="https://github.com/olmosalexis/GameTheory/assets/73005714/2a8b840e-a6ff-4849-a193-1ef61bcf90a0">
 
 ## Getting Started
 
